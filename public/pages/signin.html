@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In</title>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In - Esimira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+<!-- Satoshi font is not available on Google Fonts, it should be hosted locally. -->
+       <link href="../css/main.css" rel="stylesheet">
+ <link rel="stylesheet" href="../css/global.css">
+  <script src="../global.js" defer></script>
+  <style id="sections-styles">
+/* CSS for section section:signin */
+.signin-page {
+    display: flex;
+    max-width: 100%;
+    min-height: 900px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    overflow: hidden;
+  }
+
+  .signin-promo {
+    flex: 0 0 644px;
+    position: relative;
+    padding: 30px 62px;
+    background: linear-gradient(137deg, #f4633a 0%, #8e3a22 137.24%);
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .promo-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    transform: rotate(180deg);
+    overflow: hidden;
+  }
+  .merged-bg-images {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .bg-img-1 {
+    position: absolute;
+    left: -467.29px;
+    top: 12.82px;
+  }
+  .bg-img-2 {
+    position: absolute;
+    left: -467.29px;
+    top: 469.94px;
+    transform: rotate(180deg);
+  }
+
+  .promo-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .promo-header {
+    margin-bottom: 173px;
+  }
+
+  .logo {
+    position: relative;
+    width: 112px;
+    height: 37px;
+  }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .feature-icon-wrapper {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.33);
+    border: 1px solid rgba(255, 255, 255, 0.33);
+    border-radius: 10px;
+    backdrop-filter: blur(1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .feature-item:nth-child(3) .feature-icon-wrapper {
+    padding: 16px 19px;
+  }
+
+  .icon-group {
+    position: relative;
+    width: 40px;
+    height: 40px;
+  }
+
+  .feature-text h3 {
+    margin: 0 0 6px;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.35;
+    letter-spacing: 0.18px;
+  }
+
+  .feature-text p {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.28;
+    letter-spacing: 0.14px;
+  }
+  .feature-item:nth-child(3) .feature-text p {
+    line-height: 1.42;
+  }
+
+  .signin-form-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-header {
+    margin-bottom: 30px;
+  }
+
+  .form-header p {
+    margin: 0 0 0px;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.35;
+  }
+
+  .form-header h1 {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1.35;
+  }
+
+  .signin-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 15px;
+  }
+
+  .input-group label {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    color: var(--color-text-dark);
+  }
+
+  .input-group input {
+    height: 48px;
+    padding: 0 16px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    background-color: var(--bg-light);
+    font-size: 16px;
+    font-family: var(--font-primary);
+    color: var(--color-text-dark);
+  }
+  .input-group input::placeholder {
+    color: var(--color-text-light);
+  }
+
+  .password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .password-wrapper input {
+    width: 100%;
+    padding-right: 45px;
+  }
+  .password-toggle {
+    position: absolute;
+    right: 14px;
+    cursor: pointer;
+  }
+
+  .forgot-password {
+    align-self: flex-end;
+    margin-top: -2px; /* Adjusting from gap */
+    margin-bottom: 30px;
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--color-link);
+  }
+
+  .btn {
+    height: 52px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .separator {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 30px 0;
+  }
+  .separator hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid var(--color-border-medium);
+  }
+  .separator span {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--color-text-medium);
+    letter-spacing: 0.16px;
+  }
+
+  .social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  .btn-social {
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--color-border-dark);
+    border-radius: 50px;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-text-black);
+    letter-spacing: 0.16px;
+  }
+  .btn-social img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .signup-link {
+    text-align: center;
+    font-family: var(--font-primary);
+    font-size: 18px;
+    color: var(--color-text-black);
+    margin: 0;
+  }
+  .signup-link a {
+    color: var(--color-link);
+    font-weight: 400;
+  }
+
+  @media (max-width: 1024px) {
+    .signin-page {
+      flex-direction: column;
+    }
+    .signin-promo {
+      flex: 0 0 auto;
+      height: auto;
+      padding: 40px 30px;
+    }
+    .promo-header {
+      margin-bottom: 80px;
+    }
+    .features-list {
+      gap: 40px;
+    }
+    .signin-form-section {
+      padding: 60px 30px;
+    }
+  }
+  .signin-header {
+  display: none;
+}
+@media (max-width: 767px) {
+   .signin-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* center the logo */
+    position: relative;
+    padding: 12px 0;
+    background: #fff;
+    z-index: 10;
+    border-bottom: 1px solid #eee;
+  }
+.desktop-view{
+  display: none;
+}
+  .signin-header .back-btn {
+    position: absolute;
+    left: 16px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .signin-header .back-btn img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .signin-header .logo img {
+    height: 40px;
+    object-fit: contain;
+  }
+  .signin-page {
+    flex-direction: column;
+  }
+
+  .signin-form-section {
+    order: 1;
+  }
+
+
+  .signin-promo {
+    order: 2;
+  }
+
+
+  .signin-promo,
+  .signin-form-section {
+    width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+<section id="section-signin">
+ <main class="signin-page">
+<header class="signin-header">
+  <button class="back-btn" onclick="history.back()">
+    <img src="../assets/images/back-btn.png" alt="Back" />
+  </button>
+
+  <div class="logo">
+    <img src="../assets/images/Frame-logo.png" alt="Esimira Logo" />
+  </div>
+</header>
+
+
+    <div class="signin-promo">
+      <div class="promo-bg-pattern">
+        <!--merged image-->
+        <div class="merged-bg-images">
+          <img src="../assets/images/75_11492.svg" alt="background pattern" class="bg-img-1">
+          <img src="../assets/images/75_11939.svg" alt="background pattern" class="bg-img-2">
+        </div>
+      </div>
+      <div class="promo-content">
+        <header class="promo-header">
+          <!--merged image-->
+          <div class="logo desktop-view">
+            <img src="../assets/images/75_12420.svg" alt="Esimira Logo" style="position: absolute; top: 0px; left: 0px;">
+            <img src="../assets/images/75_12421.svg" alt="Esimira Logo" style="position: absolute; top: 6.2080078125px; left: 34.56640625px;">
+            <img src="../assets/images/75_12432.svg" alt="Esimira Logo" style="position: absolute; top: 27.4765625px; left: 34.4296875px;">
+          </div>
+        </header>
+        <div class="features-list">
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <img src="../assets/images/75_12390.svg" alt="Secure Payments Icon">
+            </div>
+            <div class="feature-text">
+              <h3>Secure Payments</h3>
+              <p>We prioritize your security with advanced payment protection, keeping your financial details safe at every step.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <div class="icon-group">
+                <img src="../assets/images/75_12401.svg" alt="Resident Number Icon" style="position: absolute; top: 1.6669921875px; left: 3.333984375px;">
+                <img src="../assets/images/75_12405.svg" alt="" style="position: absolute; top: 11px; left: 19.5px;">
+              </div>
+            </div>
+            <div class="feature-text">
+              <h3>Resident Number</h3>
+              <p>Enjoy seamless communication with a local number — call and message effortlessly wherever your journey takes you.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <img src="../assets/images/75_12412.svg" alt="Instant Activation Icon">
+            </div>
+            <div class="feature-text">
+              <h3>Instant Activation</h3>
+              <p>Connect in seconds — no physical SIM or delays. Just scan, install, and start using your eSIM right away.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="signin-form-section">
+      <div class="form-container">
+        <header class="form-header">
+          <p>Travel Smarter with Us</p>
+          <h1>SignIn</h1>
+        </header>
+        <form class="signin-form">
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Example@email.com">
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="password" name="password" placeholder="At least 8 characters">
+              <img src="../assets/images/75_12475.svg" alt="Show password" class="password-toggle">
+            </div>
+          </div>
+          <a href="#" class="forgot-password">Forgot Password?</a>
+          <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+        <div class="separator">
+          <hr>
+          <span>OR</span>
+          <hr>
+        </div>
+        <div class="social-login">
+          <button class="btn btn-social">
+            <img src="../assets/images/75_12487.svg" alt="Google icon">
+            <span>Sign In with Google</span>
+          </button>
+          <button class="btn btn-social">
+            <img src="../assets/images/75_12502.svg" alt="Facebook icon">
+            <span>Sign In with Facebook</span>
+          </button>
+          <button class="btn btn-social">
+            <img src="../assets/images/a2be846863522e8be393a7ed3a097e051ec9bbfb.png" alt="Apple icon">
+            <span>Sign In with Apple</span>
+          </button>
+        </div>
+        <p class="signup-link">
+          Don't you have an account? <a href="#">Sign up</a>
+        </p>
+      </div>
+    </div>
+  </main>
+</section>
+</body>
+</html>

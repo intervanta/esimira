@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generated Page</title>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+      <link href="../css/main.css" rel="stylesheet">
+ <link rel="stylesheet" href="../css/global.css">
+  <script src="../global.js" defer></script>
+  <style id="sections-styles">
+/* CSS for section section:signup */
+#signup {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        /* padding: 20px; */
+    }
+
+    .signup-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        width: 100%;
+        min-height: 900px;
+        overflow: hidden;
+    }
+
+    .info-panel {
+        position: relative;
+        background: linear-gradient(137deg, #f4633a 0%, #8e3a22 137.24%);
+        color: var(--text-light);
+        padding-left: 60px;
+         padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        overflow: hidden;
+    }
+
+    .info-panel-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.15;
+        transform: rotate(180deg);
+        overflow: hidden;
+    }
+
+    .bg-dots-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .bg-dots-wrapper img {
+        position: absolute;
+    }
+
+    .bg-dot-1 {
+        bottom: 12.8%;
+        left: 0;
+    }
+
+    .bg-dot-2 {
+        top: 12.8%;
+        left: 0;
+        transform: rotate(180deg);
+    }
+
+    .info-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 170px;
+    }
+
+    .logo {
+        position: relative;
+        width: 112px;
+        height: 37px;
+    }
+
+    .logo img {
+        position: absolute;
+    }
+    .logo-part-1 { top: 0; left: 0; }
+    .logo-part-2 { top: 6.2px; left: 34.5px; }
+    .logo-part-3 { top: 27.5px; left: 34.4px; }
+
+    .features-list {
+        display: flex;
+        flex-direction: column;
+        gap: 90px;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .feature-icon-wrapper {
+        flex-shrink: 0;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.33);
+        border: 1px solid rgba(255, 255, 255, 0.33);
+        border-radius: 10px;
+        backdrop-filter: blur(1px);
+    }
+    
+    .icon-merge-wrapper {
+        position: relative;
+        width: 40px;
+        height: 40px;
+    }
+
+    .feature-icon-wrapper--alt-padding {
+        padding: 16px 19px;
+    }
+
+    .feature-text h3 {
+        margin: 0 0 6px 0;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 1.35;
+    }
+
+    .feature-text p {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.3;
+        max-width: 350px;
+    }
+
+    .form-panel {
+        background-color: var(--bg-light);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+    }
+
+    .form-wrapper {
+        width: 100%;
+        max-width: 450px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .form-header p {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+
+    .form-header h2 {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 900;
+        color: var(--text-dark);
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+    }
+
+    .form-group label {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        background-color: var(--bg-input);
+        font-size: 16px;
+        color: var(--text-dark);
+    }
+
+    .form-group input::placeholder {
+        color: var(--text-secondary);
+    }
+
+    .password-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .password-input-wrapper input {
+        padding-right: 45px;
+    }
+
+    .password-toggle-btn {
+        position: absolute;
+        right: 14px;
+        height: 100%;
+    }
+
+    .submit-btn {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        font-size: 20px;
+        font-weight: 400;
+        padding: 16px;
+        border-radius: 50px;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .divider {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: var(--text-tertiary);
+    }
+
+    .divider hr {
+        flex-grow: 1;
+        border: none;
+        border-top: 1px solid var(--border-medium);
+    }
+
+    .social-login {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .social-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        padding: 12px;
+        border: 1px solid var(--border-dark);
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 400;
+        color: #111111;
+    }
+
+    .social-btn img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+    }
+
+    .signin-link {
+        text-align: center;
+        font-size: 18px;
+        font-family: 'Roboto', sans-serif;
+        color: #122b31;
+    }
+
+    .signin-link a {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    @media (min-width: 1200px) {
+        .signup-container {
+            grid-template-columns: 644px 1fr;
+        }
+
+        .form-row {
+            flex-direction: row;
+            gap: 10px;
+        }
+    }
+    .signup-header {
+  display: none;
+}
+    @media (max-width: 768px) {
+       .info-panel {
+    order: 2; 
+     padding: 40px 20px;
+  }
+   .signup-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* center the logo */
+    position: relative;
+    padding: 12px 0;
+    background: #fff;
+    z-index: 10;
+    border-bottom: 1px solid #eee;
+  }
+  .signup-header .back-btn {
+    position: absolute;
+    left: 16px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .signup-header .back-btn img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+.desktop-view{
+  display: none;
+}
+  .signup-header .logo img {
+    height: 40px;
+    object-fit: contain;
+  }
+.signup-container {
+     display: flex;
+   flex-direction: column;
+  }
+  .form-panel {
+    order: 1; 
+     padding: 40px 20px;
+  }
+        .info-content {
+            gap: 80px;
+        }
+        .features-list {
+            gap: 40px;
+        }
+        /* .form-panel {
+            padding: 40px 20px;
+        } */
+        
+    }
+  
+  </style>
+
+</head>
+<body>
+       <header class="signup-header">
+  <button class="back-btn" onclick="history.back()">
+    <img src="../assets/images/back-btn.png" alt="Back" />
+  </button>
+
+  <div class="logo">
+    <img src="../assets/images/Frame-logo.png" alt="Esimira Logo" />
+  </div>
+</header>
+<section id="signup">
+    <div class="signup-container">
+        
+        <aside class="info-panel">
+            <div class="info-panel-bg">
+                <!--merged image-->
+                <div class="bg-dots-wrapper">
+                    <img src="../assets/images/75_12519.svg" alt="background pattern" class="bg-dot-1">
+                    <img src="../assets/images/75_12966.svg" alt="background pattern" class="bg-dot-2">
+                </div>
+            </div>
+            <div class="info-content">
+                <!--merged image-->
+                <div class="logo desktop-view">
+                    <img src="../assets/images/75_13447.svg" alt="Esimira Logo" class="logo-part-1">
+                    <img src="../assets/images/75_13448.svg" alt="" class="logo-part-2">
+                    <img src="../assets/images/75_13459.svg" alt="" class="logo-part-3">
+                </div>
+                <div class="features-list">
+                    <article class="feature-item">
+                        <div class="feature-icon-wrapper">
+                            <img src="../assets/images/75_13417.svg" alt="Secure Payments Icon">
+                        </div>
+                        <div class="feature-text">
+                            <h3>Secure Payments</h3>
+                            <p>We prioritize your security with advanced payment protection, keeping your financial details safe at every step.</p>
+                        </div>
+                    </article>
+                    <article class="feature-item">
+                        <div class="feature-icon-wrapper">
+                            <!--merged image-->
+                            <div class="icon-merge-wrapper">
+                                <img src="../assets/images/75_13428.svg" alt="Resident Number Icon" style="position: absolute; top: 1.67px; left: 3.33px;">
+                                <img src="../assets/images/75_13432.svg" alt="" style="position: absolute; top: 11px; left: 19.5px;">
+                            </div>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Resident Number</h3>
+                            <p>Enjoy seamless communication with a local number — call and message effortlessly wherever your journey takes you.</p>
+                        </div>
+                    </article>
+                    <article class="feature-item">
+                        <div class="feature-icon-wrapper feature-icon-wrapper--alt-padding">
+                            <img src="../assets/images/75_13439.svg" alt="Instant Activation Icon">
+                        </div>
+                        <div class="feature-text">
+                            <h3>Instant Activation</h3>
+                            <p>Connect in seconds — no physical SIM or delays. Just scan, install, and start using your eSIM right away.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </aside>
+        <main class="form-panel">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <p>Became a Member With Us</p>
+                    <h2>SignUp</h2>
+                </div>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" placeholder="Example:- John">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" placeholder="Example:- Doe">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="password" placeholder="At least 8 characters">
+                            <button type="button" class="password-toggle-btn">
+                                <img src="../assets/images/75_13514.svg" alt="Show password">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="confirm-password" placeholder="At least 8 characters">
+                            <button type="button" class="password-toggle-btn">
+                                <img src="../assets/images/75_13521.svg" alt="Show password">
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                </form>
+                <div class="divider">
+                    <hr>
+                    <span>OR</span>
+                    <hr>
+                </div>
+                <div class="social-login">
+                    <button class="social-btn">
+                        <img src="../assets/images/75_13534.svg" alt="Google Icon">
+                        <span>Sign in with Google</span>
+                    </button>
+                    <button class="social-btn">
+                        <img src="../assets/images/75_13546.svg" alt="Facebook Icon">
+                        <span>Sign in with Facebook</span>
+                    </button>
+                    <button class="social-btn">
+                        <img src="../assets/images/a2be846863522e8be393a7ed3a097e051ec9bbfb.png" alt="Apple Icon">
+                        <span>Sign in with Apple</span>
+                    </button>
+                </div>
+                <p class="signin-link">
+                    Already have an account? <a href="#">Sign In</a>
+                </p>
+            </div>
+        </main>
+    </div>
+</section>
+</body>
+</html>

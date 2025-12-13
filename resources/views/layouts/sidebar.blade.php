@@ -1,0 +1,60 @@
+<aside class="sidebar">
+    <nav>
+        <ul id="sidebarMenu">
+            <li>
+                <a href="{{ route('dashboard.index') }}" class="{{ request()->routeIs('dashboard.index') ? 'active' : '' }}" 
+                   >
+                    <img src="{{ asset('assets/images/account_black.png') }}" alt=""> Account information
+                </a>
+            </li>
+
+            <li>
+                <a href="#" data-target="trusted-devices"
+                   data-icon-black="{{ asset('assets/images/280_662.svg') }}"
+                   data-icon-white="{{ asset('assets/images/trusted_white.png') }}">
+                    <img src="{{ asset('assets/images/280_662.svg') }}" alt=""> Trusted devices
+                </a>
+            </li>
+
+            <li>
+                <a href="#" data-target="membership"
+                   data-icon-black="{{ asset('assets/images/280_667.svg') }}"
+                   data-icon-white="{{ asset('assets/images/mira_white.png') }}">
+                    <img src="{{ asset('assets/images/280_667.svg') }}" alt=""> MiraVault
+                </a>
+            </li>
+
+            <li>
+                <a href="#" data-target="refer-earn"
+                   data-icon-black="{{ asset('assets/images/280_674.svg') }}"
+                   data-icon-white="{{ asset('assets/images/refer_white.png') }}">
+                    <img src="{{ asset('assets/images/280_674.svg') }}" alt=""> Refer and earn
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('dashboard.orders') }}" class="{{ request()->routeIs('dashboard.orders') ? 'active' : '' }}" data-target="orders" 
+                   data-icon-black="{{ asset('assets/images/280_680.svg') }}"
+                   data-icon-white="{{ asset('assets/images/order_white.png') }}">
+                    <img src="{{ asset('assets/images/280_680.svg') }}" alt=""> Orders
+                </a>
+            </li>
+
+            <li>
+                <a href="#" data-target="help"
+                   data-icon-black="{{ asset('assets/images/280_685.svg') }}"
+                   data-icon-white="{{ asset('assets/images/help_white.png') }}">
+                    <img src="{{ asset('assets/images/280_685.svg') }}" alt=""> Help
+                </a>
+            </li>
+
+            <li>
+                <a href="#" data-target="support"
+                   data-icon-black="{{ asset('assets/images/280_690.svg') }}"
+                   data-icon-white="{{ asset('assets/images/support_white.png') }}">
+                    <img src="{{ asset('assets/images/280_690.svg') }}" alt=""> Support
+                </a>
+            </li>
+        </ul>
+    </nav>
+</aside>

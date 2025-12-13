@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+      <link href="../css/main.css" rel="stylesheet">
+</head>
+<body>
+ <div class="flex flex-col justify-start items-center h-[68vh]  w-full bg-[url('../assets/images/checkout-bg.png')] bg-cover bg-center relative">
+
+<section id="hero" class="hero-section max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-[196px] relative z-10">
+ 
+  <div class="container hero-content">
+    <h1>Checkout</h1>
+   <p class="max-w-[500px] mx-auto text-center">
+  Having an account ensures a smooth checkout, instant activation, and quick access to your plan details whenever you need them.<br>
+  Please sign up or log in before completing your eSIM purchase.
+</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn btn-outline">Sign UP</a>
+      <a href="#" class="btn btn-primary">Sign In</a>
+    </div>
+  </div>
+</section>
+</div>
+<main id="checkout" class="checkout-section py-16">
+ <div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-24">
+<div class="payment-form">
+  <h2 class="payment-title">
+    Choose a <span class="text-primary">payment method</span>
+  </h2>
+
+  <!-- Tabs -->
+  <div class="payment-tabs-container relative">
+    <nav class="payment-tabs flex gap-6 relative">
+      <button class="payment-tab active relative" data-tab="card">Credit/Debit Card</button>
+      <button class="payment-tab" data-tab="gpay">Gpay</button>
+      <button class="payment-tab" data-tab="paypal">Paypal</button>
+    </nav>
+
+    <!-- Animated underline -->
+    <div class=" absolute bottom-0 left-0 w-full h-[2px] bg-transparent">
+      <div class="active-line absolute bottom-0 left-0 h-[2px] bg-[#f4633a] transition-all duration-300 ease-in-out"></div>
+    </div>
+  </div>
+
+  <!-- Tab Contents -->
+  <div class="payment-tab-content mt-6">
+    <!-- Credit/Debit -->
+    <div class="tab-pane active" id="card">
+      <form class="card-form">
+        <div class="form-group">
+          <label for="card-number">Enter Credit/Debit Number</label>
+          <input type="text" id="card-number" placeholder="E.g. 8457 3465 6524 2531" />
+        </div>
+        <div class="form-group">
+          <label for="card-holder">Enter Card Holder Name</label>
+          <input type="text" id="card-holder" placeholder="E.g. Ashok Kumar" />
+        </div>
+        <div class="card-details-row">
+          <div class="form-group">
+            <label for="expiry-date">MM/YY</label>
+            <input type="text" id="expiry-date" placeholder="E.g. 11/11" />
+          </div>
+          <div class="form-group">
+            <label for="cvv">
+              CVV <a href="#" class="cvv-link">What is CVV?</a>
+            </label>
+            <input type="text" id="cvv" placeholder="E.g. 333" />
+          </div>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="save-card" class="custom-checkbox" />
+          <label for="save-card">Save this card as per RBI guidelines</label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">PAY NOW</button>
+      </form>
+    </div>
+
+    <!-- Gpay -->
+    <div class="tab-pane" id="gpay">
+      <p>Waiting for Gpay integration...</p>
+    </div>
+
+    <!-- Paypal -->
+    <div class="tab-pane" id="paypal">
+      <p>Waiting for Paypal integration...</p>
+    </div>
+  </div>
+</div>
+
+
+    <aside class="order-summary">
+      <h3>Order Summary</h3>
+      <div class="summary-details">
+        <dl>
+          <div class="summary-item">
+            <dt>Plan</dt>
+            <dd>10 GB</dd>
+          </div>
+          <div class="summary-item">
+            <dt>Type</dt>
+            <dd>Data Only</dd>
+          </div>
+          <div class="summary-item">
+            <dt>Duration</dt>
+            <dd>30 Days</dd>
+          </div>
+          <div class="summary-item">
+            <dt>Tax country</dt>
+            <dd>India</dd>
+          </div>
+           <div class="summary-item promo-item">
+                    <div class="promo-code-applied">
+                        <span>Promocode</span>
+                        <div class="promo-tag">
+                            <span>ESIM50</span>
+                            <button>
+                                <img src="../assets/images/218_35133.svg" alt="Remove promocode">
+                            </button>
+                        </div>
+                    </div>
+                    <strong>-$2.99</strong>
+                </div>
+        </dl>
+      </div>
+      <div class="summary-total">
+        <span>Total</span>
+        <span class="total-price">$22.99</span>
+      </div>
+      <div class="promo-code-section">
+        <h4>Have a promo code?</h4>
+        <p>Apply promocode to get discount</p>
+        <div class="promo-input-group">
+          <input type="text" placeholder="Eg:- ESIM50">
+          <button class="btn btn-primary" id="apply-btn-now">Apply</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+  <script src="../global.js" defer></script>
+</body>
+</html>

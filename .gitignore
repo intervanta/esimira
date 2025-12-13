@@ -5,10 +5,10 @@ yarn-error.log
 
 # Laravel 4 specific
 bootstrap/compiled.php
-app/storage/
+#app/storage/
 
 # Laravel 5 & Lumen specific
-public/storage
+#public/storage
 public/hot
 
 # Laravel 5 & Lumen specific with changed public path
@@ -23,7 +23,7 @@ Homestead.json
 .phpunit.result.cache
 
 /public/build
-/storage/pail
+#/storage/pail
 .env.backup
 .env.production
 .phpactor.json
