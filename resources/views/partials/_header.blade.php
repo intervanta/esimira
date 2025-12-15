@@ -18,10 +18,14 @@
                     ['route' => 'about', 'label' => 'About Esimira'],
                     ['route' => 'help', 'label' => 'Help'],
                     ['route' => 'reseller-business', 'label' => 'Reseller & Business'],
+                    ['route' => 'my-esims', 'label' => 'My Esims'],
                 ];
             @endphp
 
             @foreach ($nav as $item)
+                @if ($item['route'] === 'my-esims' && !auth()->check())
+                    @continue
+                @endif
                 @php
                     $isActive = request()->routeIs($item['route']);
                 @endphp
@@ -43,12 +47,13 @@
             </button>
 
             @auth
-                <!-- MiraVault Balance -->
-                <div class="hidden lg:flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200">
-                    <span class="text-sm font-semibold text-[#f4633a] font-['Satoshi']" id="miravaultBalance">
-                        {{ getCurrencySymbol() }}{{ number_format(Auth::user()->balance ?? 0, 2) }}
-                    </span>
-                </div>
+           <!-- MiraVault Balance -->
+            <div class="hidden lg:flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200" 
+                id="miravaultBalanceContainer">
+                <span class="text-sm font-semibold text-[#f4633a] font-['Satoshi']">
+                    {{ getCurrencySymbol() }}<span id="miravaultBalance">{{ number_format(Auth::user()->wallet_balance ?? Auth::user()->balance ?? 0, 2) }}</span>
+                </span>
+            </div>
             @endauth
 
             <!-- Currency Selector - Hidden on mobile -->

@@ -6,7 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "bacon/bacon-qr-code": "^2.0",
+        "barryvdh/laravel-dompdf": "^3.1",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "^2.7",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
@@ -15,6 +18,7 @@
         "mcamara/laravel-localization": "^2.0",
         "predis/predis": "^3.2",
         "razorpay/razorpay": "^2.9",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "socialiteproviders/apple": "^5.7",
         "spatie/laravel-medialibrary": "^10.15",
         "typesense/typesense-php": "^5.1"

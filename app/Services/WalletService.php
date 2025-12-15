@@ -7,12 +7,14 @@ use App\Models\WalletTransaction;
 
 class WalletService
 {
-    public function credit(Customer $customer, $amount, $source, $description = null)
+    public function credit(Customer $customer, $amount, $source, $description = null ,$order_id = null)
     {
-        $customer->wallet_balance += $amount;
-        $customer->save();
-
+         $customer->increment('wallet_balance', $amount);
+    
+         $customer->refresh();
+       
         WalletTransaction::create([
+            'order_id' => $order_id,
             'customer_id' => $customer->id,
             'type' => 'credit',
             'source' => $source,

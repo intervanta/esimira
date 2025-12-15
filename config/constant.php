@@ -9,7 +9,7 @@ return [
 
     'convenience_percentage' => env('CONVENIENCE_PERCENT', 0.03),
     'gst_percentage' => env('GST_PERCENT', 0.18),
-
+    'order_confirmation_credit' => 0.25,
 
 
 
