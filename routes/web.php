@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\MyEsimController;
+use App\Http\Controllers\AccountOrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -140,10 +142,15 @@ Route::group([
             Route::get('/', [AccountController::class, 'index'])->name('index');
 
             // Orders
-            Route::get('/orders', [AccountController::class, 'orders'])->name('orders');
+            Route::get('/orders', [AccountOrderController::class, 'index'])->name('orders');
+            Route::get('/orders/{order}/receipt', [AccountOrderController::class, 'receipt'])->name('orders.receipt');
+
         });
 
 
+          Route::get('/my-esims', [MyEsimController::class, 'index'])->name('my-esims');
+          Route::get('/esim/{id}/install', [MyEsimController::class, 'install'])->name('esim.install.page');
+            Route::get('/esim-details/{activation}', [MyEsimController::class, 'showDetails'])->name('esim-details');
 
         Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('customer.profile.update');
         Route::post('/profile/promo-emails', [ProfileController::class, 'updatePromoEmails'])->name('customer.promo-emails.update');
@@ -159,7 +166,6 @@ Route::group([
 
         // Add this to your web.php file
         Route::post('/payment/verify', [CheckoutController::class, 'verify'])->name('payment.verify');
-
         Route::get('/order-confirmation', [CheckoutController::class, 'confirmation'])->name('order.confirmation');
 
 

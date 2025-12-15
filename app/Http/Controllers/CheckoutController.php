@@ -13,20 +13,30 @@ use App\Models\User;
 use App\Helpers\PriceHelper;
 use App\Models\Customer;
 use App\Models\Activation;
+use App\Models\WalletTransaction;
 use App\Services\RazorpayService;
 use App\Services\PayPalService;
 use Illuminate\Support\Facades\Log;
-
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Storage;
+use App\Services\QrCodeService; 
+use App\Services\KeepGoLineService;
+use App\Services\WalletService;
 class CheckoutController extends Controller
 {
     protected $razorpayService;
     protected $paypalService;
-
+    protected $qrCodeService;
+    protected $keepGoLineServices;
+    protected $walletServices;
     public function __construct()
     {
         $this->middleware('auth');
         $this->razorpayService = new RazorpayService();
         $this->paypalService = new PayPalService();
+        $this->qrCodeService = new QrCodeService();
+        $this->keepGoLineServices = new KeepGoLineService();
+        $this->walletServices = new WalletService();
     }
 
     public function show(Request $request)
@@ -394,43 +404,107 @@ class CheckoutController extends Controller
     }
 
 
-    public function confirmation(Request $request)
-    {
-        $orderNumber = $request->query('order_number');
+public function confirmation(Request $request)
+{
+    $orderNumber = $request->query('order_number');
 
-        if (!$orderNumber) {
-            return redirect()->route('home')->with('error', 'Order not found.');
-        }
-
-        $order = Order::where('order_number', $orderNumber)
-            ->where('customer_id', auth()->id())
-            ->first();
-
-        if (!$order) {
-            return redirect()->route('home')->with('error', 'Order not found.');
-        }
-
-        // update order status
-        if ($order->status !== Order::STATUS_COMPLETED) {
-            $order->status = Order::STATUS_COMPLETED;
-            $order->payment_status = 1;
-            $order->completed_at = now();
-            $order->save();
-
-            // CREATE ACTIVATION ENTRY
-            Activation::create([
-                'order_id'        => $order->id,
-                'customer_id'     => auth()->id(),
-                'iccid'           => $order->iccid,
-                'smdp_plus'       => $order->smdp_plus,
-                'activation_code' => $order->activation_code,
-                'qr_code_url'     => $order->qr_code_url,  // optional
-                'status'          => 'pending',
-            ]);
-        }
-
-        return view('pages.order_confirmation', [
-            'order' => $order,
-        ]);
+    if (! $orderNumber) {
+        return redirect()->route('home')->with('error', 'Order not found.');
     }
+
+    $order = Order::with('bundle','refill','latestTransaction','activation')
+        ->where('order_number', $orderNumber)
+        ->where('customer_id', auth()->id())
+        ->first();
+
+    if (! $order) {
+        return redirect()->route('home')->with('error', 'Order not found.');
+    }
+
+    //  HARD GUARD — NOTHING RUNS AFTER THIS
+    if ($order->status === Order::STATUS_COMPLETED) {
+        return view('pages.order_confirmation', compact('order'));
+    }
+
+    DB::transaction(function () use ($order) {
+
+        //  CREATE LINE
+        $createResponse = $this->keepGoLineServices->createLine([
+            'refill_mb'   => $order->refill->amount_mb,
+            'refill_days' => $order->bundle->type === 'plan'
+                                ? $order->refill->amount_days
+                                : null,
+            'bundle_id'   => $order->bundle->keepgo_bundle_id,
+            'count'       => 1,
+        ]);
+
+        $iccid = $createResponse['sim_card']['iccid'];
+
+        //  GET LINE DETAILS
+        $detailsResponse = $this->keepGoLineServices->getLineDetails($iccid);
+        $sim = $detailsResponse['sim_card'];
+
+        // GENERATE QR
+        $qrPath = $this->qrCodeService->generateEsimQr(
+            $sim['lpa_code'],
+            12,
+            true
+        );
+
+        //  UPDATE ORDER (NOW MARK COMPLETED)
+        $order->update([
+            'status'         => Order::STATUS_COMPLETED,
+            'payment_status' => 1,
+            'completed_at'   => now(),
+        ]);
+
+        // CREATE ACTIVATION
+        Activation::create([
+            'bundle_id'        => $order->bundle_id,
+            'refill_id'        => $order->refill_id,
+            'order_id'         => $order->id,
+            'customer_id'      => auth()->id(),
+
+            'iccid'            => $sim['iccid'],
+            'msisdn'           => $sim['msisdn'] ?? null,
+            'activation_code'  => $sim['lpa_code'] ?? null,
+            'lpa_code'         => $sim['lpa_code'] ?? null,
+            'bundle_name'      => $sim['bundle'] ?? $order->bundle->name,
+
+            'allowed_usage_mb' => isset($sim['allowed_usage_kb'])
+                                    ? (int) ($sim['allowed_usage_kb'] / 1024)
+                                    : null,
+            'remaining_usage_mb' => isset($sim['remaining_usage_kb'])
+                                    ? (int) ($sim['remaining_usage_kb'] / 1024)
+                                    : null,
+
+            'remaining_days'   => $sim['remaining_days'] ?? null,
+            'deactivation_date'=> $sim['deactivation_date'] ?: null,
+
+            'qr_code_url'      => $qrPath,
+            'status'           => strtolower($sim['status']) === 'activated'
+                                    ? 'activated'
+                                    : 'processing',
+            'is_refill'        => false,
+            'notes'            => $sim['notes'] ?? null,
+        ]);
+
+        //WALLET CREDIT
+        $walletAmount = config('constant.order_confirmation_credit');
+
+        if ($walletAmount > 0) {
+            $this->walletServices->credit(
+                auth()->user(),
+                $walletAmount,
+                'order_confirmation',
+                'Order confirmation bonus',
+                $order->id
+            );
+        }
+    });
+
+    return view('pages.order_confirmation', compact('order'));
+}
+
+
 }

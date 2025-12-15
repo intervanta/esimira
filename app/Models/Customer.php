@@ -25,6 +25,7 @@ class Customer extends Authenticatable
         'promotional_emails',
         'email_verified_at',
         'locale',
+        'wallet_balance',
         'currency', // recommended to store user's preferred currency
         'referral_credits', // if you store referral earnings separately
     ];

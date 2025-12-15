@@ -12,12 +12,4 @@ class AccountController extends Controller
     {
         return view('dashboard');
     }
-
-    public function orders()
-    {
-        $orders = Order::where('customer_id', auth()->id())->latest()->get();
-
-        
-        return view('account.orders', compact('orders'));
-    }
 }

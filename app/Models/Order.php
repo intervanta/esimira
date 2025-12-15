@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\WalletTransaction;
 class Order extends Model
 {
     use HasFactory;
@@ -95,7 +95,10 @@ class Order extends Model
     {
         return $this->belongsTo(Bundle::class);
     }
-
+    public function activation()
+    {
+        return $this->belongsTo(Activation::class);
+    }
     public function refill()
     {
         return $this->belongsTo(Refill::class);
@@ -190,5 +193,10 @@ class Order extends Model
             self::PAYMENT_PARTIALLY_REFUNDED => 'Partially Refunded',
             default => 'Unknown',
         };
+    }
+
+    public function walletTransaction()
+    {
+        return $this->hasOne(WalletTransaction::class, 'order_id');
     }
 }
