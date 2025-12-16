@@ -1,4 +1,4 @@
-<div id="help" class="hidden">
+<div id="help" >
     <div class="content-header mb-4">
         <h3>Help & FAQs</h3>
     </div>

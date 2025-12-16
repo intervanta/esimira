@@ -32,10 +32,10 @@
                         </span>
                     </div>
                     <div class="text-3xl font-bold text-gray-900 mb-1">
-                        {{ $activation->remaining_data ?? 0 }} GB
+                        {{ $activation->line_details['remaining_usage_gb'] ?? 0 }} GB
                     </div>
                     <div class="text-sm text-gray-500">
-                        {{ __('of') }} {{ $activation->total_data ?? 0 }} GB {{ __('total') }}
+                        {{ __('of') }} {{ $activation->line_details['allowed_usage_gb'] ?? 0 }} GB {{ __('total') }}
                     </div>
                 </div>
 
@@ -46,10 +46,10 @@
                         <span class="text-sm font-medium text-gray-700">{{ __('Remaining Days') }}</span>
                     </div>
                     <div class="text-3xl font-bold text-gray-900 mb-1">
-                        {{ $activation->remaining_days ?? 0 }}
+                        {{ $activation->line_details['remaining_days'] ?? 0 }}
                     </div>
                     <div class="text-sm text-gray-500">
-                        {{ __('of') }} {{ $activation->total_days ?? 0 }} {{ __('days validity') }}
+                        {{ __('of') }} {{ $activation->line_details['remaining_days'] ?? 0 }} {{ __('days validity') }}
                     </div>
                 </div>
 

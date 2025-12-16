@@ -32,7 +32,7 @@
 
                 <div class="content-box space-y-12">
                     
-                     @include('account.sections.orders')
+                     @include('account.sections.support')
                
                 </div>
 

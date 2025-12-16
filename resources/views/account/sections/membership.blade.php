@@ -1,4 +1,4 @@
-<div id="membership" class="hidden">
+<div id="membership" >
     <div class="content-header mb-6">
         <h3 class="text-2xl font-bold text-gray-900">MIRA Vault</h3>
         <p class="text-sm text-gray-600 mt-1">Your secure wallet for eSIM credits & rewards</p>

@@ -1,4 +1,4 @@
-<div id="trusted-devices" class="hidden">
+<div id="trusted-devices">
     <div class="content-header mb-6">
         <h3 class="text-2xl font-bold text-gray-800">Trusted Devices</h3>
     </div>
