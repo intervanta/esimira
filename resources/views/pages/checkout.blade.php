@@ -85,7 +85,7 @@
                                 <input type="radio" name="payment-method" value="razorpay" class="hidden">
                             </label>
 
-                            <label
+                            {{-- <label
                                 class="payment-option cursor-pointer border-2 border-gray-200 rounded-xl p-6 hover:border-primary-checkout hover:bg-blue-50 transition group"
                                 data-method="paypal">
                                 <div class="flex items-center justify-between">
@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                                 <input type="radio" name="payment-method" value="paypal" class="hidden">
-                            </label>
+                            </label> --}}
                         </div>
                     </div>
                 </div>
