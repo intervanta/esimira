@@ -51,7 +51,7 @@
             <div class="hidden lg:flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200" 
                 id="miravaultBalanceContainer">
                 <span class="text-sm font-semibold text-[#f4633a] font-['Satoshi']">
-                    {{ getCurrencySymbol() }}<span id="miravaultBalance">{{ number_format(Auth::user()->wallet_balance ?? Auth::user()->balance ?? 0, 2) }}</span>
+                    <span id="miravaultBalance">{{ number_format(Auth::user()->wallet_balance ?? Auth::user()->balance ?? 0, 2) }}</span>
                 </span>
             </div>
             @endauth

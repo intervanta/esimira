@@ -19,9 +19,10 @@ use App\Services\PayPalService;
 use Illuminate\Support\Facades\Log;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
-use App\Services\QrCodeService; 
+use App\Services\QrCodeService;
 use App\Services\KeepGoLineService;
 use App\Services\WalletService;
+
 class CheckoutController extends Controller
 {
     protected $razorpayService;
@@ -119,6 +120,7 @@ class CheckoutController extends Controller
             $refill = Refill::with('bundle')->findOrFail($validated['refill_id']);
             $customer = auth()->user(); // Get customer
             $currency = $refill->bundle->currency ?? 'USD';
+            $paymentMethod = $validated['payment_method'];
 
             // Calculate final amount
             $priceData = PriceHelper::calculateFinalAmount(
@@ -134,7 +136,7 @@ class CheckoutController extends Controller
             Log::info('Customer details: ' . json_encode($customer));
             Log::info('Refill details: ' . json_encode($refill));
 
-            $order = $this->createOrderRecord($refill, $priceData, $validated, $customer);
+            $order = $this->createOrderRecord($refill, $priceData, $validated, $customer, $paymentMethod);
 
             // Handle payment based on method
             if ($validated['payment_method'] === 'razorpay') {
@@ -168,9 +170,48 @@ class CheckoutController extends Controller
     }
 
 
-    private function createOrderRecord($refill, $priceData, $validated, $customer)
+    private function createOrderRecord($refill, $priceData, $validated, $customer, $paymentMethod)
     {
-        return Order::create([
+
+        $currentCurrency = 'USD';
+        if ($paymentMethod == 'razorpay') {
+            $currentCurrency = 'INR';
+            Log::info('Creating order record for Razorpay payment method.');
+        } elseif ($paymentMethod == 'paypal') {
+            Log::info('Creating order record for PayPal payment method.');
+        }
+        // 🔹 Convert once
+        $convertedPlanAmount = PriceHelper::convertCurrency(
+            $priceData['plan_amount'],
+            $priceData['currency'],
+            $currentCurrency
+        );
+
+        $convertedConvenienceFee = PriceHelper::convertCurrency(
+            $priceData['convenience_fee'],
+            $priceData['currency'],
+            $currentCurrency
+        );
+
+        $convertedGstAmount = PriceHelper::convertCurrency(
+            $priceData['gst_on_convenience'],
+            $priceData['currency'],
+            $currentCurrency
+        );
+
+        $convertedDiscountAmount = PriceHelper::convertCurrency(
+            $priceData['coupon_discount'],
+            $priceData['currency'],
+            $currentCurrency
+        );
+
+        $convertedFinalAmount = PriceHelper::convertCurrency(
+            $priceData['final_amount_after_discounts'],
+            $priceData['currency'],
+            $currentCurrency
+        );
+
+        $order = Order::create([
             'order_number' => 'ORD' . time() . rand(1000, 9999),
             'invoice_number' => 'INV' . time() . rand(1000, 9999),
             'customer_id' => $customer->id,
@@ -190,6 +231,25 @@ class CheckoutController extends Controller
             'status' => Order::STATUS_PENDING,
             'payment_status' => Order::PAYMENT_PENDING,
         ]);
+
+
+        $order->amount()->create([
+            'plan_amount' => $priceData['plan_amount'],
+            'convenience_fee' => $priceData['convenience_fee'],
+            'gst_amount' => $priceData['gst_on_convenience'],
+            'discount_amount' => $priceData['coupon_discount'],
+            'final_amount' => $priceData['final_amount_after_discounts'],
+            'currency' => $priceData['currency'],
+
+            'converted_plan_amount' => $convertedPlanAmount,
+            'converted_convenience_fee' => $convertedConvenienceFee,
+            'converted_gst_amount' => $convertedGstAmount,
+            'converted_discount_amount' => $convertedDiscountAmount,
+            'converted_final_amount' => $convertedFinalAmount,
+            'converted_currency' => $currentCurrency,
+        ]);
+
+        return $order;
     }
 
     private function createTransactionRecord($order, $gateway, $gatewayOrderId = null)
@@ -404,107 +464,105 @@ class CheckoutController extends Controller
     }
 
 
-public function confirmation(Request $request)
-{
-    $orderNumber = $request->query('order_number');
+    public function confirmation(Request $request)
+    {
+        $orderNumber = $request->query('order_number');
 
-    if (! $orderNumber) {
-        return redirect()->route('home')->with('error', 'Order not found.');
-    }
+        if (! $orderNumber) {
+            return redirect()->route('home')->with('error', 'Order not found.');
+        }
 
-    $order = Order::with('bundle','refill','latestTransaction','activation')
-        ->where('order_number', $orderNumber)
-        ->where('customer_id', auth()->id())
-        ->first();
+        $order = Order::with('bundle', 'refill', 'latestTransaction', 'activation')
+            ->where('order_number', $orderNumber)
+            ->where('customer_id', auth()->id())
+            ->first();
 
-    if (! $order) {
-        return redirect()->route('home')->with('error', 'Order not found.');
-    }
+        if (! $order) {
+            return redirect()->route('home')->with('error', 'Order not found.');
+        }
 
-    //  HARD GUARD — NOTHING RUNS AFTER THIS
-    if ($order->status === Order::STATUS_COMPLETED) {
+        //  HARD GUARD — NOTHING RUNS AFTER THIS
+        if ($order->status === Order::STATUS_COMPLETED) {
+            return view('pages.order_confirmation', compact('order'));
+        }
+
+        DB::transaction(function () use ($order) {
+
+            //  CREATE LINE
+            $createResponse = $this->keepGoLineServices->createLine([
+                'refill_mb'   => $order->refill->amount_mb,
+                'refill_days' => $order->bundle->type === 'plan'
+                    ? $order->refill->amount_days
+                    : null,
+                'bundle_id'   => $order->bundle->keepgo_bundle_id,
+                'count'       => 1,
+            ]);
+
+            $iccid = $createResponse['sim_card']['iccid'];
+
+            //  GET LINE DETAILS
+            $detailsResponse = $this->keepGoLineServices->getLineDetails($iccid);
+            $sim = $detailsResponse['sim_card'];
+
+            // GENERATE QR
+            $qrPath = $this->qrCodeService->generateEsimQr(
+                $sim['lpa_code'],
+                12,
+                true
+            );
+
+            //  UPDATE ORDER (NOW MARK COMPLETED)
+            $order->update([
+                'status'         => Order::STATUS_COMPLETED,
+                'payment_status' => 1,
+                'completed_at'   => now(),
+            ]);
+
+            // CREATE ACTIVATION
+            Activation::create([
+                'bundle_id'        => $order->bundle_id,
+                'refill_id'        => $order->refill_id,
+                'order_id'         => $order->id,
+                'customer_id'      => auth()->id(),
+
+                'iccid'            => $sim['iccid'],
+                'msisdn'           => $sim['msisdn'] ?? null,
+                'activation_code'  => $sim['lpa_code'] ?? null,
+                'lpa_code'         => $sim['lpa_code'] ?? null,
+                'bundle_name'      => $sim['bundle'] ?? $order->bundle->name,
+
+                'allowed_usage_mb' => isset($sim['allowed_usage_kb'])
+                    ? (int) ($sim['allowed_usage_kb'] / 1024)
+                    : null,
+                'remaining_usage_mb' => isset($sim['remaining_usage_kb'])
+                    ? (int) ($sim['remaining_usage_kb'] / 1024)
+                    : null,
+
+                'remaining_days'   => $sim['remaining_days'] ?? null,
+                'deactivation_date' => $sim['deactivation_date'] ?: null,
+
+                'qr_code_url'      => $qrPath,
+                'status'           => strtolower($sim['status']) === 'activated'
+                    ? 'activated'
+                    : 'processing',
+                'is_refill'        => false,
+                'notes'            => $sim['notes'] ?? null,
+            ]);
+
+            //WALLET CREDIT
+            $walletAmount = config('constant.order_confirmation_credit');
+
+            if ($walletAmount > 0) {
+                $this->walletServices->credit(
+                    auth()->user(),
+                    $walletAmount,
+                    'order_confirmation',
+                    'Order confirmation bonus',
+                    $order->id
+                );
+            }
+        });
+
         return view('pages.order_confirmation', compact('order'));
     }
-
-    DB::transaction(function () use ($order) {
-
-        //  CREATE LINE
-        $createResponse = $this->keepGoLineServices->createLine([
-            'refill_mb'   => $order->refill->amount_mb,
-            'refill_days' => $order->bundle->type === 'plan'
-                                ? $order->refill->amount_days
-                                : null,
-            'bundle_id'   => $order->bundle->keepgo_bundle_id,
-            'count'       => 1,
-        ]);
-
-        $iccid = $createResponse['sim_card']['iccid'];
-
-        //  GET LINE DETAILS
-        $detailsResponse = $this->keepGoLineServices->getLineDetails($iccid);
-        $sim = $detailsResponse['sim_card'];
-
-        // GENERATE QR
-        $qrPath = $this->qrCodeService->generateEsimQr(
-            $sim['lpa_code'],
-            12,
-            true
-        );
-
-        //  UPDATE ORDER (NOW MARK COMPLETED)
-        $order->update([
-            'status'         => Order::STATUS_COMPLETED,
-            'payment_status' => 1,
-            'completed_at'   => now(),
-        ]);
-
-        // CREATE ACTIVATION
-        Activation::create([
-            'bundle_id'        => $order->bundle_id,
-            'refill_id'        => $order->refill_id,
-            'order_id'         => $order->id,
-            'customer_id'      => auth()->id(),
-
-            'iccid'            => $sim['iccid'],
-            'msisdn'           => $sim['msisdn'] ?? null,
-            'activation_code'  => $sim['lpa_code'] ?? null,
-            'lpa_code'         => $sim['lpa_code'] ?? null,
-            'bundle_name'      => $sim['bundle'] ?? $order->bundle->name,
-
-            'allowed_usage_mb' => isset($sim['allowed_usage_kb'])
-                                    ? (int) ($sim['allowed_usage_kb'] / 1024)
-                                    : null,
-            'remaining_usage_mb' => isset($sim['remaining_usage_kb'])
-                                    ? (int) ($sim['remaining_usage_kb'] / 1024)
-                                    : null,
-
-            'remaining_days'   => $sim['remaining_days'] ?? null,
-            'deactivation_date'=> $sim['deactivation_date'] ?: null,
-
-            'qr_code_url'      => $qrPath,
-            'status'           => strtolower($sim['status']) === 'activated'
-                                    ? 'activated'
-                                    : 'processing',
-            'is_refill'        => false,
-            'notes'            => $sim['notes'] ?? null,
-        ]);
-
-        //WALLET CREDIT
-        $walletAmount = config('constant.order_confirmation_credit');
-
-        if ($walletAmount > 0) {
-            $this->walletServices->credit(
-                auth()->user(),
-                $walletAmount,
-                'order_confirmation',
-                'Order confirmation bonus',
-                $order->id
-            );
-        }
-    });
-
-    return view('pages.order_confirmation', compact('order'));
-}
-
-
 }

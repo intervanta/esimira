@@ -69,7 +69,7 @@ class CurrencyController extends Controller
 
     public static function getCurrentCurrency()
     {
-        return session('currency', 'USD');
+        return session('currency', 'INR');
     }
 
     public static function getCurrencySymbol($currency = null)

@@ -55,9 +55,14 @@ class KeepGoLineService
      */
     public function getLineDetails(string $iccid): array
     {
+
         Log::info('Fetching KeepGo line details', [
             'iccid' => $iccid,
         ]);
+
+        if (!app()->environment('production')) {
+            return $this->mockDetailsResponse($iccid);
+        }
 
         Log::debug('KeepGo Get Line Details Request', [
             'url'     => "{$this->baseUrl}/line/{$iccid}/get_details",
