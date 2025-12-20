@@ -137,7 +137,8 @@ class BundleController extends Controller
                 // Only include regional or global bundles (not country-specific)
                 $query->where('is_region', true)
                     ->orWhere('is_global', true)
-                    ->orWhere('is_gcc', true);
+                    ->orWhere('is_gcc', true)
+                    ->orWhere('is_lifetime', true);
             })
             ->where(function ($query) use ($currentBundle) {
                 // Check if this bundle's country is in the coverage list
@@ -155,6 +156,10 @@ class BundleController extends Controller
                     'image' => $bundle->image ? asset('storage/' . $bundle->image) : '/assets/images/map.svg',
                     'min_price' => $cheapestRefill ? $cheapestRefill->sale_price : $bundle->cheapest_price,
                     'currency_sign' => $bundle->currency_sign,
+                    'is_lifetime' => $bundle->currency_sign,
+                    'is_gcc' => $bundle->currency_sign,
+                    'is_global' => $bundle->currency_sign,
+                    'is_region' => $bundle->currency_sign,
                     'type' => $bundle->is_region ? 'Regional' : ($bundle->is_global ? 'Global' : 'GCC'),
                 ];
             });

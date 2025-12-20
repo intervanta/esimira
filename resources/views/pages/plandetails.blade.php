@@ -305,18 +305,31 @@
                             <div class="flex-shrink-0 w-[280px] bg-white rounded-[12px] p-4 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                 onclick="window.location.href='{{ url('/plans/' . $coverageBundle['slug']) }}'">
                                 <!-- Header with flag and type -->
-                                <div class="flex items-center gap-3 mb-3">
-                                    <img src="{{ $coverageBundle['image'] }}" alt="{{ $coverageBundle['name'] }}"
-                                        class="w-8 h-8 object-contain rounded-full">
-                                    <div class="flex-1">
-                                        <h3 class="text-[16px] font-bold text-[#000000] font-['Satoshi'] leading-tight">
-                                            {{ $coverageBundle['name'] }}
-                                        </h3>
-                                        <span class="text-[12px] font-medium text-[#666]">
-                                            {{ $coverageBundle['type'] }} eSIM
-                                        </span>
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <img src="{{ $coverageBundle['image'] }}"
+                                            alt="{{ $coverageBundle['name'] }}"
+                                            class="w-8 h-8 object-contain rounded-full">
+
+                                        <div class="flex-1">
+                                            <h3 class="text-[16px] font-bold text-[#000000] font-['Satoshi'] leading-tight">
+                                                {{ $coverageBundle['name'] }}
+                                            </h3>
+
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-[12px] font-medium text-[#666]">
+                                                    {{ $coverageBundle['type'] }} eSIM
+                                                </span>
+
+                                                @if ($coverageBundle['is_lifetime'])
+                                                    <span
+                                                        class="text-[10px] px-2 py-[2px] rounded-full bg-[#f4633a]/10 text-[#f4633a] font-semibold">
+                                                        Lifetime
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+
 
                                 <!-- Price Section -->
                                 <div class="flex items-center justify-between">

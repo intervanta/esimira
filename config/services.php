@@ -67,4 +67,9 @@ return [
         'AED' => 3.67,
         'SAR' => 3.75,
     ],
+
+    'unsplash' => [
+        'key' => env('UNSPLASH_ACCESS_KEY'),
+    ],
+
 ];
