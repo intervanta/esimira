@@ -6,103 +6,189 @@
 
 @section('content')
 
-<div class="flex flex-col justify-start items-center h-[68vh] w-full  bg-[url('../assets/images/terms-bg.png')] bg-cover bg-center relative">
+<div class="flex flex-col justify-start items-center h-[68vh] w-full  bg-[url('../assets/images/about-bg.png')] bg-cover bg-center relative">
 
 <section id="hero" class="hero-section max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-[196px] relative z-10">
   <div class="container hero-content">
     <h1>About Us</h1>
-    <p class="breadcrumbs">Home → About Us</p>
+    <p class="breadcrumbs">Home→ About Us</p>
   </div>
 </section>
 
 </div>
-
-{{-- SECTION 1 — WHO WE ARE --}}
-<section id="user-agreement" class="checkout-section py-16">
-   <div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 gap-24">
-
-    <h2 class="section-title">Who <span class="highlight">We Are</span></h2>
-
-    <div class="text-content">
-      <p>
-        Esimira is a global digital eSIM service designed for modern travelers, remote workers, and anyone who needs seamless mobile connectivity worldwide. 
-        Our mission is simple — to make mobile data easy, accessible, and instant without relying on physical SIM cards or lengthy activation processes.
-      </p>
-
-      <p>
-        With Esimira, you can stay connected in 150+ countries using secure, fast, and reliable digital eSIM technology. Whether you’re exploring new destinations, working internationally, or traveling frequently, Esimira ensures uninterrupted connectivity wherever your journey takes you.
-      </p>
-
-      <p>
-        We are committed to creating a smooth, digital-first experience with instant activation, affordable plans, transparent pricing, and a completely hassle-free setup. No waiting, no contracts, no physical SIM delivery — just pure connectivity.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-{{-- SECTION 2 — OUR VISION & MISSION --}}
 <section id="policies" class="checkout-section py-16">
 <div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 gap-24">
-
-    <h2 class="section-title">Our Vision & <span class="highlight">Mission</span></h2>
-
+    <h2 class="section-title">About <span class="highlight">Me</span></h2>
     <div class="policies-content">
       <div class="text-column">
-        <p>
-          Our vision is to transform how people connect globally by eliminating the limits of traditional SIM cards and roaming charges. 
-          We believe that travel should be stress-free, and staying connected should not come with hidden costs or complicated processes.
-        </p>
-
-        <p>
-          Esimira’s mission is to provide world-class digital connectivity through a platform that is simple, transparent, and truly global. 
-          We aim to empower travelers with the freedom to use mobile data anywhere in the world instantly.
-        </p>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
       </div>
-
       <div class="image-column">
-        <div style="position: relative; width: 372.29px; height: 250px;">
-          <img src="../assets/images/policies.png" alt="About Esimira illustration">
+        <!--merged image-->
+        <div style="position: relative">
+          <img src="../assets/images/about5.png" alt="abstract illustration">
+          
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
-{{-- SECTION 3 — OUR VALUES --}}
-<section id="legal-info" class="checkout-section py-16">
+<section id="policies" class="checkout-section py-16">
 <div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 gap-24">
+   
+    <div class="policies-content">
+     <div class="text-column-one">
+  <h2 class="section-title">What Is</h2>
+  <h2 class="highlight">Esimira?</h2>
+</div>
 
-    <h2 class="section-title">Our <span class="highlight">Values</span></h2>
+      <div class="text-column-two">
+         <h2 class="section-sub-title">Our Mission</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
+      </div>
+      <div class="text-column-three">
+         <h2 class="section-sub-title">Our Vision</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
+      </div>
+     
+    </div>
+  </div>
+</section>
 
-    <div class="text-content">
+<section id="policies" class="checkout-section py-16">
+<div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 gap-24">
+    <h2 class="section-title-quick">Quick <span class="highlight">Facts</span></h2>
+    <div class="policies-content">
+       <div class="image-column">
+        <!--merged image-->
+        <div style="position: relative; width: 500px;">
+          <img src="../assets/images/about1.png" alt="abstract illustration">
+          
+        </div>
+      </div>
+      <div class="text-column">
+        <h2 class="section-sub-title-quick">Impact</h2>
+        <p class="sub-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
+       <h2 class="section-sub-title-quick">Our Values</h2>
+        <p class="sub-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
+       <h2 class="section-sub-title-quick">Our team</h2>
+        <p class="sub-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
+      </div>
+     
+    </div>
+  </div>
+</section>
+<section id="policies" class="checkout-section py-16 legal-section">
+<div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 gap-24">
+    <h2 class="section-title">Legal <span class="highlight">Information</span></h2>
+    <div class="policies-content">
+      <div class="text-column">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      </div>
+      <div class="image-column">
+        <!--merged image-->
+        <div style="position: relative; ">
+          <img src="../assets/images/about2.png" alt="abstract illustration">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 gap-24">
+    <div class="policies-content">
+         <div class="image-column">
+        <!--merged image-->
+        <div style="position: relative; ">
+          <img src="../assets/images/about3.png" alt="abstract illustration">
+          
+        </div>
+      </div>
+      <div class="text-column">
+        <h2 class="section-title-legal mt-10">Legal <span class="highlight">Information</span></h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      </div>
+   
+    </div>
+  </div>
+</section>
+<section id="policies" class="checkout-section py-16">
+<div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 gap-24">
+    <h2 class="section-title">Our <span class="highlight">Story</span></h2>
+    <div class="policies-content">
+      <div class="text-column">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      </div>
+      <div class="image-column">
+        <!--merged image-->
+        <div style="position: relative;">
+          <img src="../assets/images/about4.png" alt="abstract illustration">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="section-hero-about" class="hero-section-about">
+  <div class="hero-container-about">
+    
+    <!-- Background Decorations -->
+    <img src="../assets/images/427_1337.svg" class="bg-shape-left" alt="" aria-hidden="true">
+    <img src="../assets/images/427_1338.svg" class="bg-cloud-right" alt="" aria-hidden="true">
+    <img src="../assets/images/427_1344.svg" class="bg-dots-right" alt="" aria-hidden="true">
+    
+    <!-- Merged Image: Top Left Circle Group -->
+    <div class="circle-group">
+      <!--merged image-->
+      <img src="../assets/images/427_1382.svg" class="circle-bg" alt="" aria-hidden="true">
+      <img src="../assets/images/427_1384.svg" class="circle-fg" alt="" aria-hidden="true">
+    </div>
 
-      <p>
-        <strong>❖ Innovation First:</strong>  
-        We embrace cutting-edge eSIM technology to deliver the fastest and most efficient mobile connectivity solutions.
-      </p>
+    <img src="../assets/images/427_1395.svg" class="bg-shape-bottom" alt="" aria-hidden="true">
+    <img src="../assets/images/427_1396.svg" class="paper-plane" alt="" aria-hidden="true">
+    <img src="../assets/images/427_1403.svg" class="cloud-center-1" alt="" aria-hidden="true">
+    <img src="../assets/images/427_1404.svg" class="cloud-center-2" alt="" aria-hidden="true">
 
-      <p>
-        <strong>❖ Global Freedom:</strong>  
-        We remove barriers to communication by enabling travelers to enjoy seamless data connectivity across borders.
-      </p>
+    <!-- Main Content -->
+    <div class="hero-content-about">
+      <div class="text-group-about">
+        <h1 class="hero-title-about">
+          Refer a friend, <br>
+          and you’ll both get US$5!
+        </h1>
+        <p class="hero-subtitle-about">
+          Refer friends to Simira and earn US $15 in Simira credits — they’ll get a US $15 discount too!
+        </p>
+      </div>
+      <div class="cta-wrapper">
+        <button class="btn-referral">
+          Referal
+        </button>
+      </div>
+    </div>
 
-      <p>
-        <strong>❖ Transparency & Trust:</strong>  
-        No hidden fees, no complicated contracts — just straightforward plans that work.
-      </p>
+    <!-- Suitcase Illustration (Merged Group) -->
+    <div class="suitcase-illustration">
+      <!--merged image-->
+      <!-- Main Body -->
+      <img src="../assets/images/427_1418.svg" class="suitcase-body" alt="Suitcase">
+      <!-- Handle -->
+      <img src="../assets/images/427_1535.svg" class="suitcase-handle" alt="">
+      <!-- Details/Pocket -->
+      <img src="../assets/images/Group-card.png" class="suitcase-details" alt="">
+      <!-- Wheels/Bottom -->
+      <img src="../assets/images/427_1542.svg" class="suitcase-bottom" alt="">
+      <!-- Tag -->
+      <img src="../assets/images/427_1557.svg" class="suitcase-tag" alt="">
+      <!-- Floating Elements around suitcase -->
+      <img src="../assets/images/427_1406.svg" class="suitcase-float-1" alt="">
+      <img src="../assets/images/427_1409.svg" class="suitcase-float-2" alt="">
+      <img src="../assets/images/427_1412.svg" class="suitcase-float-3" alt="">
+    </div>
 
-      <p>
-        <strong>❖ Customer-Centric Approach:</strong>  
-        From instant delivery to 24/7 support, every part of Esimira is built with user convenience in mind.
-      </p>
-
-      <p>
-        Esimira continues to evolve as we expand our global coverage, refine our technology, and create smarter ways for people to stay connected. 
-        Wherever you go — Esimira goes with you.
-      </p>
-
+    <!-- People Illustration -->
+    <div class="people-illustration">
+      <img src="../assets/images/427_1580.svg" class="people-img" alt="Friends taking a selfie">
     </div>
 
   </div>

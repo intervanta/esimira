@@ -199,4 +199,10 @@ class Order extends Model
     {
         return $this->hasOne(WalletTransaction::class, 'order_id');
     }
+
+    public function amount()
+    {
+        return $this->hasOne(OrderAmount::class);
+    }
+
 }

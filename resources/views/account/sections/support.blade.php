@@ -1,4 +1,4 @@
-<div id="support" class="hidden">
+<div id="support" >
     <div class="content-header mb-4">
         <h3>Support</h3>
     </div>

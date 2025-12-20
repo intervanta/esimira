@@ -1,4 +1,4 @@
-<div id="refer-earn" class="hidden">
+<div id="refer-earn" >
     <h3 class="text-lg font-semibold text-gray-900 mb-3">Refer & Earn</h3>
     <p class="text-sm text-gray-700">
         Share your referral code and earn rewards when someone signs up using your link.

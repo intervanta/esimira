@@ -18,7 +18,12 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeviceCompatibilityController;
+use App\Http\Controllers\HelpController;
+use App\Http\Controllers\MiraVaultController;
+use App\Http\Controllers\ReferEarnController;
 use App\Http\Controllers\ResellerController;
+use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TrustedDevicesController;
 use App\Http\Middleware\Localization;
 use App\Http\Middleware\SecureCheckout;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -141,9 +146,21 @@ Route::group([
             // Main Dashboard
             Route::get('/', [AccountController::class, 'index'])->name('index');
 
+            //
+           Route::get('/trusted-devices', [TrustedDevicesController::class, 'index'])
+            ->name('trusted-devices');
+
+            Route::get('/miravault', [MiraVaultController::class, 'index'])->name('miravault');
+
+            Route::get('/refer-earn', [ReferEarnController::class, 'index'])->name('refer-earn');
+
             // Orders
             Route::get('/orders', [AccountOrderController::class, 'index'])->name('orders');
             Route::get('/orders/{order}/receipt', [AccountOrderController::class, 'receipt'])->name('orders.receipt');
+
+            Route::get('/help', [HelpController::class, 'index'])->name('help');
+
+            Route::get('/support', [SupportController::class, 'index'])->name('support');
 
         });
 
