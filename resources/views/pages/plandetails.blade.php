@@ -45,7 +45,7 @@
 
                 <div class="plans-main-content">
                     <div class="plans-image">
-                        <img src="/assets/images/fb82ae8554bff1ab93d6e4d3493b9abde0e8a529.png"
+                        <img src="{{ asset('assets/image.jpg') }}"
                             alt="View of {{ $bundle->name }}">
                     </div>
                     <div class="plans-selector">

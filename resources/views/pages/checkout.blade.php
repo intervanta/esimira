@@ -15,15 +15,6 @@
 
             <div class="container hero-content">
                 <h1>Checkout</h1>
-                <p class="max-w-[500px] mx-auto text-center">
-                    Having an account ensures a smooth checkout, instant activation, and quick access to your plan details
-                    whenever you need them.<br>
-                    Please sign up or log in before completing your eSIM purchase.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-outline">Sign UP</a>
-                    <a href="#" class="btn btn-primary">Sign In</a>
-                </div>
             </div>
         </section>
     </div>
