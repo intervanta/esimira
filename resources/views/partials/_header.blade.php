@@ -51,7 +51,7 @@
             <div class="hidden lg:flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200" 
                 id="miravaultBalanceContainer">
                 <span class="text-sm font-semibold text-[#f4633a] font-['Satoshi']">
-                    <span id="miravaultBalance">{{ number_format(Auth::user()->wallet_balance ?? Auth::user()->balance ?? 0, 2) }}</span>
+                    <span id="miravaultBalance">{{ number_format(0, 2) }}</span>
                 </span>
             </div>
             @endauth
@@ -221,7 +221,7 @@
                 <div class="flex-1">
                     <p class="text-sm font-medium text-gray-500">MiraVault Balance</p>
                     <p class="text-lg font-semibold text-[#f4633a]" id="mobileMiravaultBalance">
-                        {{ getCurrencySymbol() }}{{ number_format(Auth::user()->balance ?? 0, 2) }}
+                        {{ getCurrencySymbol() }}{{ number_format(Auth::user()->wallet_balance ?? 0, 2) }}
                     </p>
                 </div>
             </div>
@@ -590,7 +590,7 @@ window.CurrencyHelper = {
         const mobileBalanceElement = document.getElementById('mobileMiravaultBalance');
         
         // Get the user's balance in USD (assuming it's stored in USD)
-        const usdBalance = {{ Auth::user()->balance ?? 0 }};
+        const usdBalance = {{ Auth::user()->wallet_balance ?? 0 }};
         
         // Convert to current currency
         const convertedBalance = this.convertPrice(usdBalance, this.currentCurrency);

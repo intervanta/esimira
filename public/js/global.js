@@ -120,48 +120,39 @@ function initMain() {
 
 document.addEventListener("DOMContentLoaded", initMain);
 
-// ============================
-// ADMIN SIDE MENUS CLICKS
-// ============================
-//const menuLinks = document.querySelectorAll("#sidebarMenu a");
-const menuLinks = [];
+// admin side menus clicks
+const menuLinks = document.querySelectorAll("#sidebarMenu a");
 const sections = document.querySelectorAll(".content-box > *");
 
-if (menuLinks.length > 0) {
-  menuLinks.forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();
+menuLinks.forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
 
-      // Remove active state and reset icons
-      menuLinks.forEach(l => {
-        l.classList.remove("active");
-        const img = l.querySelector("img");
-        if (img) {
-          img.src = l.getAttribute("data-icon-black");
-        }
-      });
-
-      // Activate the clicked item
-      link.classList.add("active");
-      const activeImg = link.querySelector("img");
-      if (activeImg) {
-        activeImg.src = link.getAttribute("data-icon-white");
-      }
-
-      // Hide all content sections
-      sections.forEach(section => section.classList.add("hidden"));
-
-      // Show the selected section
-      const targetId = link.getAttribute("data-target");
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) targetSection.classList.remove("hidden");
+    // Remove active state and reset icons
+    menuLinks.forEach(l => {
+      l.classList.remove("active");
+      const img = l.querySelector("img");
+      img.src = l.getAttribute("data-icon-black");
     });
-  });
-}
 
-// ============================
-// SHOW/HIDE PASSWORD LOGIC
-// ============================
+    // Activate the clicked item
+    link.classList.add("active");
+    const activeImg = link.querySelector("img");
+    activeImg.src = link.getAttribute("data-icon-white");
+
+    // Hide all content sections
+    sections.forEach(section => section.classList.add("hidden"));
+
+    // Show the selected section
+    const targetId = link.getAttribute("data-target");
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) targetSection.classList.remove("hidden");
+  });
+});
+
+
+
+// Show/Hide password logic
 const passwordInput = document.getElementById("password");
 const toggleIcon = document.getElementById("togglePassword");
 
@@ -171,67 +162,68 @@ if (passwordInput && toggleIcon) {
     passwordInput.type = isHidden ? "text" : "password";
 
     toggleIcon.src = isHidden
-      ? '../assets/images/eye-closed.png' 
-      : '../assets/images/280_729.svg';  
+    ? '../assets/images/eye-closed.png' 
+    : '../assets/images/280_729.svg';  
     toggleIcon.alt = isHidden ? "Hide password" : "Show password";
   });
 }
 
-// ============================
-// SEARCH MODAL FUNCTIONALITY
-// ============================
+// new js
+   // =============================
+// SEARCH MODAL (kept this version)
+// =============================
 const searchInput = document.getElementById('searchInput');
 const modalOverlay = document.querySelector('.search-modal-overlay');
 const closeModal = document.getElementById('closeModal');
-const searchList = document.getElementById('searchList');
 
-// Search modal show/hide
-if (searchInput && modalOverlay) {
+if (searchInput) {
   searchInput.addEventListener('focus', () => {
     modalOverlay.classList.remove('hidden');
   });
 }
 
-if (closeModal && modalOverlay) {
+if (closeModal) {
   closeModal.addEventListener('click', () => {
     modalOverlay.classList.add('hidden');
   });
 }
+// search onclick appear list
+  const searchList = document.getElementById('searchList');
 
-// Search list show/hide
-if (searchInput && searchList) {
+  // Show list when input is clicked or focused
+  if(searchInput){
   searchInput.addEventListener('focus', () => {
     searchList.classList.remove('hidden');
   });
+}
+// Hide list when clicking outside
+document.addEventListener('click', (e) => {
+    if (searchInput && searchList) {
+  if (!searchInput.contains(e.target) && !searchList.contains(e.target)) {
+    searchList.classList.add('hidden');
+  }
+}
+});
 
-  // Hide list when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!searchInput.contains(e.target) && !searchList.contains(e.target)) {
-      searchList.classList.add('hidden');
+document.addEventListener("DOMContentLoaded", () => {
+  const modalOverlay = document.getElementById("compatibility-modal");
+
+  if (!modalOverlay) return;  // Prevents ALL future errors
+
+  modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.classList.add("hidden");
     }
   });
-}
+});
 
-// ============================
-// COMPATIBILITY MODAL
-// ============================
-const compatibilityModal = document.getElementById("compatibility-modal");
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') modalOverlay.classList.add('hidden');
+});
 
-if (compatibilityModal) {
-  compatibilityModal.addEventListener("click", (e) => {
-    if (e.target === compatibilityModal) {
-      compatibilityModal.classList.add("hidden");
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') compatibilityModal.classList.add('hidden');
-  });
-}
-
-// ============================
+// =============================
 // NAV ITEMS ACTIVE STATE
-// ============================
+// =============================
 document.addEventListener('DOMContentLoaded', () => {
   const navItems = document.querySelectorAll('.nav-item');
 
@@ -244,9 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ============================
+// =============================
 // MOBILE MENU TOGGLE
-// ============================
+// =============================
 const menuButton = document.querySelector('[aria-label="Open menu"]');
 let menuOpen = false;
 
@@ -257,50 +249,46 @@ if (menuButton) {
   });
 }
 
-// ============================
-// PLAN TABS
-// ============================
-const planTabs = document.querySelectorAll('.plan-tab');
-const planPanes = document.querySelectorAll('.tab-pane');
-const tabIndicator = document.getElementById('tab-indicator');
+// =============================
+// PLAN TABS (kept only this final version)
+// =============================
+const tabs = document.querySelectorAll('.plan-tab');
+const panes = document.querySelectorAll('.tab-pane');
+const indicator = document.getElementById('tab-indicator');
 
-function activatePlanTab(tab) {
-  planTabs.forEach(t => t.classList.remove('active-tab', 'font-bold', 'text-[#f4633a]'));
+function activateTab(tab) {
+  tabs.forEach(t => t.classList.remove('active-tab', 'font-bold', 'text-[#f4633a]'));
   tab.classList.add('active-tab', 'font-bold', 'text-[#f4633a]');
 
   const rect = tab.getBoundingClientRect();
   const parentRect = tab.parentElement.getBoundingClientRect();
 
-  if (tabIndicator) {
-    tabIndicator.style.width = rect.width + 'px';
-    tabIndicator.style.left = (rect.left - parentRect.left) + 'px';
-  }
+  indicator.style.width = rect.width + 'px';
+  indicator.style.left = (rect.left - parentRect.left) + 'px';
 
   const target = tab.dataset.tab;
-  planPanes.forEach(p => {
+  panes.forEach(p => {
     p.classList.toggle('hidden', p.dataset.content !== target);
   });
 }
 
-if (planTabs.length > 0) {
-  planTabs.forEach(tab => {
-    tab.addEventListener('click', () => activatePlanTab(tab));
-  });
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => activateTab(tab));
+});
 
-  window.addEventListener('load', () => {
-    const active = document.querySelector('.plan-tab.active-tab');
-    if (active) activatePlanTab(active);
-  });
+window.addEventListener('load', () => {
+  const active = document.querySelector('.plan-tab.active-tab');
+  if (active) activateTab(active);
+});
 
-  window.addEventListener('resize', () => {
-    const active = document.querySelector('.plan-tab.active-tab');
-    if (active) activatePlanTab(active);
-  });
-}
+window.addEventListener('resize', () => {
+  const active = document.querySelector('.plan-tab.active-tab');
+  if (active) activateTab(active);
+});
 
-// ============================
+// =============================
 // QR SCAN ANIMATION
-// ============================
+// =============================
 document.querySelectorAll('[data-scan="qr"]').forEach(element => {
   element.addEventListener('click', () => {
     element.classList.add('scan-animation');
@@ -308,161 +296,146 @@ document.querySelectorAll('[data-scan="qr"]').forEach(element => {
   });
 });
 
-// ============================
-// FAQ FUNCTIONALITY
-// ============================
+// =============================
+// FAQ
+// =============================
 const faqItems = document.querySelectorAll('.faq-item');
 
-if (faqItems.length > 0) {
-  faqItems.forEach(item => {
-    const header = item.querySelector('.faq-header');
-    const content = item.querySelector('.faq-content');
-    const toggle = item.querySelector('.faq-toggle span');
+faqItems.forEach(item => {
+  const header = item.querySelector('.faq-header');
+  const content = item.querySelector('.faq-content');
+  const toggle = item.querySelector('.faq-toggle span');
 
-    if (header && content && toggle) {
-      header.addEventListener('click', () => {
-        const isExpanded = item.dataset.expanded === 'true';
+  header.addEventListener('click', () => {
+    const isExpanded = item.dataset.expanded === 'true';
 
-        faqItems.forEach(other => {
-          if (other !== item) {
-            other.dataset.expanded = 'false';
-            other.classList.remove('faq-expanded');
-            const otherContent = other.querySelector('.faq-content');
-            const otherToggle = other.querySelector('.faq-toggle span');
-            if (otherContent) otherContent.classList.remove('expanded');
-            if (otherToggle) {
-              otherToggle.textContent = '+';
-              otherToggle.className = 'text-2xl text-[#666] font-bold';
-            }
-          }
-        });
-
-        if (isExpanded) {
-          item.dataset.expanded = 'false';
-          item.classList.remove('faq-expanded');
-          content.classList.remove('expanded');
-          toggle.textContent = '+';
-          toggle.className = 'text-2xl text-[#666] font-bold';
-        } else {
-          item.dataset.expanded = 'true';
-          item.classList.add('faq-expanded');
-          content.classList.add('expanded');
-          toggle.textContent = '×';
-          toggle.className = 'text-2xl text-[#f4633a] font-bold';
-
-          item.classList.add('zoom-bounce');
-          setTimeout(() => item.classList.remove('zoom-bounce'), 500);
-        }
-      });
-    }
-  });
-}
-
-// ============================
-// TESTIMONIALS FUNCTIONALITY
-// ============================
-const avatars = document.querySelectorAll('.avatar-selector');
-const testimonialsContainer = document.getElementById('testimonialsContainer');
-
-const testimonialSets = [
-  [
-    { name: "Robert", role: "HR Manager", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/img_670e85fe14e5634.png" },
-    { name: "Alice", role: "CEO, etc.venues", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/img_670e85fe14e5634_48x48.png" },
-    { name: "Alan", role: "Team Lead", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/Helena Turpin.png" }
-  ],
-  [
-    { name: "John", role: "Marketing Head", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" },
-    { name: "Priya", role: "Project Manager", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" },
-    { name: "Lee", role: "Tech Lead", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/Anurag Singh.png" }
-  ],
-  [
-    { name: "David", role: "Traveler", text: "Bloomr always asked good questions for our projects and helped them at a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" },
-    { name: "Nina", role: "Photographer", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/Helena Turpin.png" },
-    { name: "Ravi", role: "Freelancer", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" }
-  ],
-  [
-    { name: "Mia", role: "HR Specialist", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" },
-    { name: "Tom", role: "Consultant", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/Helena Turpin.png" },
-    { name: "Sophia", role: "Manager", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" }
-  ],
-  [
-    { name: "Arun", role: "Engineer", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" },
-    { name: "Emma", role: "Designer", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/Helena Turpin.png" },
-    { name: "Leo", role: "Product Lead", text: "Bloomr always asked good questions for our projects and helped us execute them at a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" }
-  ]
-];
-
-function renderTestimonials(index) {
-  if (!testimonialsContainer) return;
-  
-  testimonialsContainer.innerHTML = '';
-  const currentSet = testimonialSets[index] || testimonialSets[0];
-  
-  currentSet.forEach(t => {
-    const testimonialDiv = document.createElement('div');
-    testimonialDiv.className = 'snap-center shrink-0 w-[80%] sm:w-auto mx-2 bg-[#f4f4f6] rounded-[12px] p-6 flex flex-col justify-between text-left';
-    testimonialDiv.innerHTML = `
-      <p class="text-[14px] sm:text-[16px] font-normal text-[#020203] leading-[24px] mb-4">"${t.text}"</p>
-      <div class="flex items-center gap-3">
-        <img src="${t.img}" alt="${t.name}" class="w-[36px] h-[36px] rounded-full">
-        <div>
-          <h4 class="text-[12px] font-bold text-[#020203] leading-[17px]">${t.name}</h4>
-          <p class="text-[12px] text-[#020203] leading-[17px]">${t.role}</p>
-        </div>
-      </div>
-    `;
-    testimonialsContainer.appendChild(testimonialDiv);
-  });
-}
-
-if (avatars.length > 0 && testimonialsContainer) {
-  renderTestimonials(0);
-
-  avatars.forEach((avatar, index) => {
-    avatar.addEventListener('click', () => {
-      avatars.forEach(a => a.classList.remove('active'));
-      avatar.classList.add('active');
-      renderTestimonials(index);
+    faqItems.forEach(other => {
+      if (other !== item) {
+        other.dataset.expanded = 'false';
+        other.classList.remove('faq-expanded');
+        other.querySelector('.faq-content').classList.remove('expanded');
+        const ot = other.querySelector('.faq-toggle span');
+        ot.textContent = '+';
+        ot.className = 'text-2xl text-[#666] font-bold';
+      }
     });
-  });
-}
 
-// ============================
-// SMOOTH SCROLL FUNCTIONALITY
-// ============================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const targetId = this.getAttribute('href').substring(1);
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (isExpanded) {
+      item.dataset.expanded = 'false';
+      item.classList.remove('faq-expanded');
+      content.classList.remove('expanded');
+      toggle.textContent = '+';
+      toggle.className = 'text-2xl text-[#666] font-bold';
+    } else {
+      item.dataset.expanded = 'true';
+      item.classList.add('faq-expanded');
+      content.classList.add('expanded');
+      toggle.textContent = '×';
+      toggle.className = 'text-2xl text-[#f4633a] font-bold';
+
+      item.classList.add('zoom-bounce');
+      setTimeout(() => item.classList.remove('zoom-bounce'), 500);
     }
   });
 });
 
-// ============================
+// =============================
+// TESTIMONIALS
+// =============================
+
+
+  // Testimonials logic 
+  const avatars = document.querySelectorAll('.avatar-selector');
+const testimonialsContainer = document.getElementById('testimonialsContainer');
+ const testimonialSets = [
+    [
+      { name: "Robert", role: "HR Manager", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_670e85fe14e5634.png" },
+      { name: "Alice", role: "CEO, etc.venues", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_670e85fe14e5634_48x48.png" },
+      { name: "Alan", role: "Team Lead",text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Helena Turpin.png" }
+    ],
+    [
+      { name: "John", role: "Marketing Head", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" },
+      { name: "Priya", role: "Project Manager",text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" },
+      { name: "Lee", role: "Tech Lead", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Anurag Singh.png" }
+    ],
+    [
+      { name: "David", role: "Traveler", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" },
+      { name: "Nina", role: "Photographer", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Helena Turpin.png" },
+      { name: "Ravi", role: "Freelancer",text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" }
+    ],
+    [
+      { name: "Mia", role: "HR Specialist", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.",img: "../assets/images/img_kain_kyel_seo.png" },
+      { name: "Tom", role: "Consultant", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Helena Turpin.png" },
+      { name: "Sophia", role: "Manager", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" }
+    ],
+    [
+      { name: "Arun", role: "Engineer",text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" },
+      { name: "Emma", role: "Designer", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Helena Turpin.png" },
+      { name: "Leo", role: "Product Lead", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" }
+    ]
+  ];
+
+   function renderTestimonials(index) {
+  if (!testimonialsContainer) return;
+  testimonialsContainer.innerHTML = '';
+  const currentSet = testimonialSets[index] || testimonialSets[0];
+  currentSet.forEach(t => {
+    testimonialsContainer.innerHTML += `
+      <div class="snap-center shrink-0 w-[80%] sm:w-auto mx-2 bg-[#f4f4f6] rounded-[12px] p-6 flex flex-col justify-between text-left">
+        <p class="text-[14px] sm:text-[16px] font-normal text-[#020203] leading-[24px] mb-4">"${t.text}"</p>
+        <div class="flex items-center gap-3">
+          <img src="${t.img}" alt="${t.name}" class="w-[36px] h-[36px] rounded-full">
+          <div>
+            <h4 class="text-[12px] font-bold text-[#020203] leading-[17px]">${t.name}</h4>
+            <p class="text-[12px] text-[#020203] leading-[17px]">${t.role}</p>
+          </div>
+        </div>
+      </div>`;
+  });
+}
+
+    renderTestimonials(0);
+
+    avatars.forEach((avatar, index) => {
+      avatar.addEventListener('click', () => {
+        avatars.forEach(a => a.classList.remove('active'));
+        avatar.classList.add('active');
+        renderTestimonials(index);
+      });
+    });
+
+// =============================
+// SMOOTH SCROLL
+// =============================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.getElementById(anchor.getAttribute('href').substring(1));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// =============================
 // SECTION FADE-IN ANIMATION
-// ============================
-const fadeInObserver = new IntersectionObserver((entries) => {
+// =============================
+const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('animate-fade-in');
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('section').forEach(sec => fadeInObserver.observe(sec));
+document.querySelectorAll('section').forEach(sec => observer.observe(sec));
 
-// Create styles only once
-const fadeInStyle = document.createElement('style');
-fadeInStyle.textContent = `
+const style = document.createElement('style');
+style.textContent = `
   .animate-fade-in { animation: fadeIn .6s ease-in-out; }
   @keyframes fadeIn { from{ opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 `;
-document.head.appendChild(fadeInStyle);
+document.head.appendChild(style);
 
-// ============================
+// =============================
 // MOBILE BOTTOM NAV
-// ============================
+// =============================
 const mobileNav = document.getElementById('mobileBottomNav');
 
 if (mobileNav) {
@@ -490,28 +463,68 @@ if (mobileNav) {
   }
 }
 
-// ============================
+// =============================
 // DROPDOWN LANGUAGE MENU
-// ============================
-const dropdownButton = document.getElementById("dropdownButton");
-const dropdownMenu = document.getElementById("dropdownMenu");
+// =============================
+const button = document.getElementById("dropdownButton");
+const menu = document.getElementById("dropdownMenu");
 
-if (dropdownButton && dropdownMenu) {
-  dropdownButton.addEventListener("click", (e) => {
-    e.stopPropagation();
-    dropdownMenu.classList.toggle("hidden");
-  });
+if (button && menu) {
+  button.addEventListener("click", () => menu.classList.toggle("hidden"));
 
   document.addEventListener("click", (e) => {
-    if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
-      dropdownMenu.classList.add("hidden");
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add("hidden");
     }
   });
 }
 
-// ============================
-// PLAN OPTIONS SELECTION
-// ============================
+
+    // Plan Tab Functionality
+   const planTabs = document.querySelectorAll('.plan-tab');
+const tabIndicator = document.querySelector('.tab-indicator');
+
+planTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    
+    // Remove active classes
+    planTabs.forEach(t => t.classList.remove('active-tab', 'text-[#f4633a]', 'font-bold'));
+    planTabs.forEach(t => t.classList.add('text-[#101010]', 'font-normal'));
+
+    // Add active class to the clicked tab
+    tab.classList.add('active-tab', 'text-[#f4633a]', 'font-bold');
+    tab.classList.remove('text-[#101010]', 'font-normal');
+
+    // Move underline indicator properly (account for scroll offset)
+    const container = tab.parentElement; // modal-tabs
+    const tabRect = tab.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const scrollLeft = container.scrollLeft; // important part!
+
+    const leftOffset = tabRect.left - containerRect.left + scrollLeft;
+
+    if (tabIndicator) {
+      tabIndicator.style.transform = `translateX(${leftOffset}px)-20px`;
+      console.log("first", tabIndicator.style.transform);
+      tabIndicator.style.width = `${tabRect.width}px - 20px`;
+      console.log("secod", tabIndicator.style.width);
+    }
+  });
+});
+
+   
+    // Smooth scrolling for anchor links (desktop + mobile)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
 document.addEventListener('DOMContentLoaded', () => {
   const planOptions = document.querySelectorAll('.plan-option');
 
@@ -523,187 +536,157 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ============================
-// KEY FEATURES TAB
-// ============================
-const featureTabs = document.querySelectorAll('.tab-link');
-const featurePanes = document.querySelectorAll('.tab-pane');
-const featureIndicator = document.querySelector('.tab-indicator');
+//    key features tab
+  const tabsim = document.querySelectorAll('.tab-link');
+  const panesim = document.querySelectorAll('.tab-pane');
+  const indicatorsim = document.querySelector('.tab-indicator');
 
-function activateFeatureTab(tab) {
-  featureTabs.forEach(t => t.classList.remove('active'));
-  tab.classList.add('active');
+  function activateTab(tab) {
+    tabsim.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
 
-  const target = tab.dataset.tab;
-  featurePanes.forEach(p => {
-    p.classList.toggle('active', p.dataset.content === target);
-  });
+    const target = tab.dataset.tab;
+    panesim.forEach(p => {
+      p.classList.toggle('active', p.dataset.content === target);
+    });
 
-  // Move indicator smoothly
-  if (featureIndicator) {
+    // Move indicator smoothly
     const rect = tab.getBoundingClientRect();
     const parentRect = tab.parentElement.getBoundingClientRect();
-    featureIndicator.style.width = rect.width + 'px';
-    featureIndicator.style.left = (rect.left - parentRect.left) + 'px';
+    indicatorsim.style.width = rect.width + 'px';
+    indicatorsim.style.left = (rect.left - parentRect.left) + 'px';
   }
-}
 
-if (featureTabs.length > 0) {
-  featureTabs.forEach(tab => {
+  tabsim.forEach(tab => {
     tab.addEventListener('click', e => {
       e.preventDefault();
-      activateFeatureTab(tab);
+      activateTab(tab);
     });
   });
 
   // Set correct indicator position on load
   window.addEventListener('load', () => {
     const active = document.querySelector('.tab-link.active');
-    if (active) activateFeatureTab(active);
+    if (active) activateTab(active);
   });
 
   // Update position on resize
   window.addEventListener('resize', () => {
     const active = document.querySelector('.tab-link.active');
-    if (active) activateFeatureTab(active);
+    if (active) activateTab(active);
   });
-}
-
-// ============================
-// COMPATIBILITY MODAL FUNCTIONS
-// ============================
 function popupOpen() {
-  const modal = document.getElementById('compatibility-modal');
-  if (modal) modal.style.display = 'flex';
+  document.getElementById('compatibility-modal').style.display = 'flex';
 }
 
 function popupClose() {
+  document.getElementById('compatibility-modal').style.display = 'none';
+}
+
+// Optional: close modal when clicking outside the content
+window.onclick = function(event) {
   const modal = document.getElementById('compatibility-modal');
-  if (modal) modal.style.display = 'none';
-}
-
-// Close modal when clicking outside
-if (compatibilityModal) {
-  compatibilityModal.addEventListener('click', (e) => {
-    if (e.target === compatibilityModal) {
-      popupClose();
-    }
-  });
-}
-
-// ============================
-// MODAL TABS WITH UNDERLINE
-// ============================
-document.addEventListener('DOMContentLoaded', () => {
-  const modalTabs = document.querySelectorAll('.modal-tab');
-  const modalPanes = document.querySelectorAll('.modal-tab-pane');
-  const modalUnderline = document.querySelector('.tab-underline');
-
-  function moveModalUnderline(activeTab) {
-    if (!modalUnderline) return;
-    
-    const tabRect = activeTab.getBoundingClientRect();
-    const container = activeTab.parentElement;
-    const containerRect = container.getBoundingClientRect();
-    const scrollOffset = container.scrollLeft;
-
-    modalUnderline.style.width = `${tabRect.width}px`;
-    modalUnderline.style.left = `${tabRect.left - containerRect.left + scrollOffset}px`;
+  if (event.target === modal) {
+    popupClose();
   }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.modal-tab');
+  const panes = document.querySelectorAll('.tab-pane');
+  const underline = document.querySelector('.tab-underline');
+
+function moveUnderline(activeTab) {
+  const tabRect = activeTab.getBoundingClientRect();
+  const container = activeTab.parentElement;
+  const containerRect = container.getBoundingClientRect();
+
+  // Add scroll offset for horizontally scrollable containers
+  const scrollOffset = container.scrollLeft;
+
+  underline.style.width = `${tabRect.width}px`;
+  underline.style.left = `${tabRect.left - containerRect.left + scrollOffset}px`;
+
+  console.log("width:", underline.style.width);
+  console.log("left:", underline.style.left);
+}
 
   // Initialize underline position on page load
-  const activeModalTab = document.querySelector('.modal-tab.active');
-  if (activeModalTab) moveModalUnderline(activeModalTab);
+  const activeTab = document.querySelector('.modal-tab.active');
+  if (activeTab) moveUnderline(activeTab);
 
   // Add click listeners
-  if (modalTabs.length > 0) {
-    modalTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        modalTabs.forEach(t => t.classList.remove('active'));
-        modalPanes.forEach(p => p.classList.remove('active'));
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panes.forEach(p => p.classList.remove('active'));
 
-        tab.classList.add('active');
-        const targetPane = document.getElementById(tab.dataset.tab);
-        if (targetPane) targetPane.classList.add('active');
-        
-        moveModalUnderline(tab);
-      });
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
+      moveUnderline(tab);
     });
+  });
 
-    // Recalculate underline on window resize
-    window.addEventListener('resize', () => {
-      const activeTab = document.querySelector('.modal-tab.active');
-      if (activeTab) moveModalUnderline(activeTab);
-    });
-  }
+  // Recalculate underline on window resize
+  window.addEventListener('resize', () => {
+    const activeTab = document.querySelector('.modal-tab.active');
+    if (activeTab) moveUnderline(activeTab);
+  });
 });
-
-// ============================
-// BRAND SELECT DROPDOWN
-// ============================
 document.addEventListener('DOMContentLoaded', () => {
   const brandSelect = document.getElementById('brandSelect');
   const selectedBrand = document.getElementById('selectedBrand');
-  const optionsList = brandSelect?.querySelector('.brand-options');
+  const optionsList = brandSelect.querySelector('.brand-options');
 
-  if (brandSelect && selectedBrand && optionsList) {
-    brandSelect.addEventListener('click', (e) => {
-      e.stopPropagation();
-      brandSelect.classList.toggle('open');
-      optionsList.classList.toggle('hidden');
-    });
+  brandSelect.addEventListener('click', (e) => {
+    e.stopPropagation();
+    brandSelect.classList.toggle('open');
+    optionsList.classList.toggle('hidden');
+  });
 
-    brandSelect.querySelectorAll('.brand-option').forEach(option => {
-      option.addEventListener('click', () => {
-        selectedBrand.textContent = option.textContent;
-        brandSelect.classList.remove('open');
-        optionsList.classList.add('hidden');
-      });
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', () => {
+  brandSelect.querySelectorAll('.brand-option').forEach(option => {
+    option.addEventListener('click', () => {
+      selectedBrand.textContent = option.textContent;
       brandSelect.classList.remove('open');
       optionsList.classList.add('hidden');
     });
-  }
-});
+  });
 
-// ============================
-// CHECKOUT PAGE PAYMENT TABS
-// ============================
-const paymentTabs = document.querySelectorAll(".payment-tab");
-const paymentPanes = document.querySelectorAll(".payment-tab-pane");
+  // Close dropdown when clicking outside
+  document.addEventListener('click', () => {
+    brandSelect.classList.remove('open');
+    optionsList.classList.add('hidden');
+  });
+});
+// checkout page tabs click
+const _tabs = document.querySelectorAll(".payment-tab");
+const _panes = document.querySelectorAll(".tab-pane");
 const activeLine = document.querySelector(".active-line");
 
-function movePaymentUnderline(tab) {
-  if (!activeLine) return;
-  
+function moveUnderline(tab) {
   const tabRect = tab.getBoundingClientRect();
   const containerRect = tab.parentElement.getBoundingClientRect();
   activeLine.style.width = `${tabRect.width}px`;
   activeLine.style.left = `${tabRect.left - containerRect.left}px`;
 }
 
-// Initialize payment tabs if they exist
-if (paymentTabs.length > 0) {
-  // Initialize underline under the first active tab
-  const defaultPaymentTab = document.querySelector(".payment-tab.active");
-  if (defaultPaymentTab) movePaymentUnderline(defaultPaymentTab);
+// initialize underline under the first active tab
+const defaultTab = document.querySelector(".payment-tab.active");
+moveUnderline(defaultTab);
 
-  paymentTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      // Remove all active states
-      paymentTabs.forEach(t => t.classList.remove("active"));
-      paymentPanes.forEach(p => p.classList.remove("active"));
+_tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    // remove all active states
+    _tabs.forEach(t => t.classList.remove("active"));
+    _panes.forEach(p => p.classList.remove("active"));
 
-      // Activate the selected tab and pane
-      tab.classList.add("active");
-      const targetPane = document.getElementById(tab.dataset.tab);
-      if (targetPane) targetPane.classList.add("active");
+    // activate the selected tab and pane
+    tab.classList.add("active");
+    document.getElementById(tab.dataset.tab).classList.add("active");
 
-      // Move underline under clicked tab
-      movePaymentUnderline(tab);
-    });
+    // move underline under clicked tab
+    moveUnderline(tab);
   });
-}
+});
+// checkout radio button
+

@@ -1,6 +1,6 @@
 <aside class="sidebar">
     <nav>
-        <ul id="sidebarMenu">
+        <ul id="myAccountSidebarMenu">
             <li>
                 <a href="{{ route('dashboard.index') }}"
                     class="{{ request()->routeIs('dashboard.index') ? 'active' : '' }}">

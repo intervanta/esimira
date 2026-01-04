@@ -2655,7 +2655,7 @@ input {
     margin: 0;
     max-width: 530px;
 }
-/* .payment-options {
+.payment-options {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -2668,7 +2668,7 @@ input {
     display: flex;
     flex-direction: column;
     gap: 15px;
-} */
+}
 .payment-option-header {
     display: flex;
     justify-content: space-between;
@@ -4239,6 +4239,10 @@ input {
     text-align: center;
   }
 }
+ .policies-content .text-column-faq {
+    max-width: 100%;
+    text-align: center;
+  }
 
 @media (max-width: 768px) {
    .paper-plane {
