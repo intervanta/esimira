@@ -13,9 +13,12 @@
         <section id="hero"
             class="hero-section max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-[196px] relative z-10">
 
-            <div class="container hero-content">
-                <h1>Checkout</h1>
-            </div>
+              <div class="container hero-content">
+            <h1 class="hero-title">
+                <span class="hero-title-light">Check</span><span class="hero-title-bold text-orange">Out</span>
+            </h1>
+            <p class="breadcrumbs">Home → Our Plan → Checkout</p>
+        </div>
         </section>
     </div>
 
@@ -66,7 +69,7 @@
 
                     <h3 class="card-subtitle">Declaration</h3>
                     <div class="accept-all">
-                        <input type="checkbox" name="terms" id="declarationAgree">
+                        <input type="checkbox"  class="scale-125" name="terms" id="declarationAgree">
                         <span style="color: #505050;">I confirm my device is <strong>eSIM-compatible</strong> and
                             <strong>unlocked</strong>.
                             I agree to the <span style="color: #f4633a;font-weight: 600;">Terms</span> & <span
@@ -76,11 +79,11 @@
                 </div>
 
                 <!-- Payment Methods -->
-                <div class="checkout-card">
+                <!-- <div class="checkout-card">
                     <h3 class="card-subtitle">Choose your payment method</h3>
 
                     <div class="payment-methods">
-                        {{-- <label class="method-card "data-method="razorpay">
+                        <label class="method-card "data-method="razorpay">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center gap-4">
                                             <div
@@ -99,7 +102,7 @@
                                         <span class="text-xs text-gray-400">via Razorpay</span>
                                     </div>
                                     <input type="radio" name="payment-method" value="razorpay" class="hidden">
-                                </label> --}}
+                                </label> 
 
                         <label class="payment-option method-card active" data-method="razorpay">
                             <div class="method-content-row">
@@ -114,7 +117,7 @@
                             </div>
                         </label>
 
-                        {{-- <label
+                         <label
                                 class="payment-option cursor-pointer border-2 border-gray-200 rounded-xl p-6 hover:border-primary-checkout hover:bg-blue-50 transition group"
                                 data-method="paypal">
                                 <div class="flex items-center justify-between">
@@ -126,9 +129,9 @@
                                     </div>
                                 </div>
                                 <input type="radio" name="payment-method" value="paypal" class="hidden">
-                            </label> --}}
+                            </label> 
                     </div>
-                </div>
+                </div> -->
 
             </div>
             <!-- Right Side: Order Summary -->
@@ -139,8 +142,8 @@
                 <div class="summary-details-check">
                     <!-- Plan Price -->
                     <div class="summary-item">
-                        <span>Plan Price</span>
-                        <div class="text-xs mt-1">
+                        <span class="mt-1">Plan Price</span>
+                        <div class="text-xs">
                             <strong class="plan-price" data-price="{{ $priceData['plan_amount'] }}">
                                 {{ $currencySign }}{{ number_format($priceData['plan_amount'], 2) }}
                             </strong>
@@ -149,7 +152,7 @@
                     <!-- Convenience Fee -->
                     <div class="summary-item">
                         <div>
-                            <span>Convenience Fee</span>
+                            <span class="mt-1">Convenience Fee</span>
                             <div class="text-xs text-gray-500 mt-1">
                                 <strong>{{ $priceData['description'] ?? '3% + 18% GST' }}</strong>
                             </div>
@@ -183,19 +186,27 @@
 
                 <!-- Total Amount -->
                 <div class="border-t pt-5">
-                    <div class="flex justify-between text-xl font-bold">
-                        <span>Total Amount</span>
+                     <div class="summary-item">
+                        <span class="mt-1 font-bold">Total Amount</span>
+                        <div class="text-xs">
+                            <strong class="plan-price" data-price="{{ $priceData['final_amount'] }}">
+                                {{ $currencySign }}{{ number_format($priceData['final_amount'], 2) }}
+                            </strong>
+                        </div>
+                    </div>
+                    <!-- <div class="flex justify-between text-xl font-bold">
+                        <span class=""></span>
                         <span id="totalAmount" class="plan-price" data-price="{{ $priceData['final_amount'] }}">
                             {{ $currencySign }}{{ number_format($priceData['final_amount'], 2) }}
                         </span>
-                    </div>
-                    <div class="mt-3 flex justify-between text-2xl font-bold text-primary-checkout">
+                    </div> -->
+                    <!-- <div class="mt-3 flex justify-between text-2xl font-bold text-primary-checkout">
                         <span>Amount to Pay</span>
                         <span id="amountToPay" class="final-price plan-price"
                             data-price="{{ $priceData['final_amount'] }}">
                             {{ $currencySign }}{{ number_format($priceData['final_amount'], 2) }}
                         </span>
-                    </div>
+                    </div> -->
                 </div>
                 {{-- </div> --}}
 
@@ -205,7 +216,7 @@
 
                     <div class="mv-list">
                         <!-- MiraVault Tile -->
-                        <div class="mv-card">
+                        <!-- <div class="mv-card">
                             <div class="flex items-center justify-between">
                                 <div class="mv-card-left">
                                     <div class="mv-icon-box">
@@ -222,10 +233,80 @@
                                     Use Balance
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
+    <!-- Tabs -->
+    <div class="mv-tabs">
+        <button class="mv-tab active" data-tab="miravault">Miravault</button>
+        <button class="mv-tab" data-tab="promotions">Promocode</button>
+    </div>
+
+    <!-- Tab Contents -->
+
+    <!-- Miravault Tab -->
+    <div class="mv-tab-content active" id="miravault">
+        <p class="mv-tab-sub-text">Use Miravault on Esimira to earn Miracoins when you:</p>
+        <ul class="list-disc pl-3 mt-2 mb-4">
+    <li>Buy ESIMs</li>
+    <li>Buy Top-ups</li>
+    <li>Refer and earn</li>
+</ul>
+
+        <div class="flex items-center justify-between">
+        
+                <!-- <div class="mv-icon-box">
+                    <img src="../assets/images/422_277.svg" alt="Balance Icon" class="mv-icon">
+                </div> -->
+                
+                <div class="mv-text-group">
+                    <div class="mv-card-title">Miravault Balance</div>
+                    <div class="mv-card-subtitle">
+                        <span class="text-black  text-[12px] sm:text-[12px]">{{ $currencySign }}{{ number_format(auth()->user()->wallet_balance ?? 0, 2) }}</span>
+                        Available
+                    </div>
+                </div>
+            
+            <button class="use-miravault-btn mv-btn">
+                Use Balance
+            </button>
+        </div>
+    </div>
+
+    <!-- Promotions Tab -->
+    <div class="mv-tab-content" id="promotions">
+        <div class="mv-promo-box">
+             <p class="mv-tab-sub-text">Apply promocode to get discount</p>
+            
+               <div class="mb-2 flex gap-3 mt-2">
+    <!-- Input -->
+    <input type="text" id="couponCodeInput" placeholder="e.g. ESIM50"
+        class="flex-1 border border-gray-300  text-sm placeholder:text-xs rounded-lg px-1 py-1 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 uppercase">
+
+    <!-- Apply Button -->
+      <button  type="button" class="promo-apply-btn use-miravault-btn mv-btn" id="applyCoupon">
+                 Apply
+            </button>
+    <button
+        class="px-1 py-  text-white whitespace-nowrap">
+       
+    </button>
+</div>
+
+<div id="couponMessage" class="mb-4 p-3 rounded-lg hidden text-sm"></div>
+
+<!-- Cancel button (optional – below) -->
+<!-- <button type="button" id="cancelCoupon"
+    class="w-full py-3 px-4 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50">
+    Cancel
+</button> -->
+
+            
+        </div>
+    </div>
+
+
 
                         <!-- Coupons Tile -->
-                        <div class="mv-card">
+                        <!-- <div class="mv-card">
                             <div class="mv-card-left">
 
                                 <div class="mv-icon-box">
@@ -240,7 +321,7 @@
                                     Apply Code
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Applied Discounts -->
@@ -289,7 +370,7 @@
 
                 <!-- PAY NOW BUTTON -->
                 <button id="payNowBtn" disabled
-                    class="btn btn-primary btn-full w-full py-5 text-xl font-bold shadow-lg mt-6 hover:shadow-xl transition disabled:opacity-60 disabled:cursor-not-allowed">
+                    class="btn btn-primary btn-full w-full py-5 text-sm shadow-lg hover:shadow-xl transition disabled:opacity-40 disabled:cursor-not-allowed">
                     PAY NOW
                 </button>
                 {{-- </div> --}}
@@ -415,8 +496,93 @@
 
     <!-- Razorpay Script -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+    .mv-tabs {
+    display: flex;
+    gap: 46px;
+    justify-content:baseline;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.mv-tab-sub-text{
+     font-weight: 500;
+    font-size: 14px;
+}
+.list-disc{
+      font-weight: 500;
+    font-size: 14px;
+}
+.mv-tab {
+    padding: 8px 0;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    color: #777;
+    cursor: pointer;
+    background: none;
+    border: none;
+    position: relative;
+}
 
+.mv-tab.active {
+    color: #f4633a;
+}
+
+.mv-tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #f4633a;
+}
+
+.mv-tab-content {
+    display: none;
+}
+
+.mv-tab-content.active {
+    display: block;
+}
+
+.promo-apply-btn {
+  background-color: #f4633a;
+  border: 1px solid #f4633a;
+  border-radius: 50px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 22px;
+  height: 35px;
+  min-width: 50px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.promo-apply-btn:hover {
+  background-color: #f4633a;
+}
+</style>
     <script>
+        
+document.querySelectorAll('.mv-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Remove active from tabs
+        document.querySelectorAll('.mv-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        // Switch content
+        document.querySelectorAll('.mv-tab-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(tab.dataset.tab).classList.add('active');
+    });
+});
+
         document.addEventListener('DOMContentLoaded', function() {
             // Security: CSRF Token for all requests
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

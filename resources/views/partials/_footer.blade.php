@@ -1,4 +1,4 @@
-<footer class="w-full bg-[#f0f0f0] rounded-[2px] py-16 sm:py-20 lg:py-24">
+<footer class="w-full bg-[#f0f0f0] rounded-[2px]">
   <div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Logo + Social -->
@@ -7,16 +7,41 @@
 
       <!-- Social Icons (Clean, No Button) -->
       <div class="flex items-center gap-6">
-        <a href="" class="text-[#101010] text-[20px] hover:text-[#f4633a] transition">
-          <i class="fa-brands fa-linkedin"></i>
+   <a href="#" class="transition">
+  <i class="fa-brands fa-linkedin
+            text-[#101010] text-[20px]
+            inline-flex items-center justify-center
+            border border-black
+            rounded-[4px]
+            p-1
+            transition
+            hover:text-[#f4633a]
+            hover:border-[#f4633a]">
+  </i>
+</a>
+
+
+
+        <a href="" class="transition">
+          <i class="fa-brands fa-instagram  text-[#101010] text-[20px]
+            inline-flex items-center justify-center
+            border border-black
+            rounded-[4px]
+            p-1
+            transition
+            hover:text-[#f4633a]
+            hover:border-[#f4633a]"></i>
         </a>
 
-        <a href="" class="text-[#101010] text-[20px] hover:text-[#f4633a] transition">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-
-        <a href="" class="text-[#101010] text-[20px] hover:text-[#f4633a] transition">
-          <i class="fab fa-x-twitter"></i>
+        <a href="" class="transition">
+          <i class="fab fa-x-twitter  text-[#101010] text-[20px]
+            inline-flex items-center justify-center
+            border border-black
+            rounded-[4px]
+            p-1
+            transition
+            hover:text-[#f4633a]
+            hover:border-[#f4633a]"></i>
         </a>
       </div>
     </div>
@@ -82,7 +107,7 @@
     <img src="{{ asset('assets/images/footer_banner.png') }}" class="w-full pt-4 bg-cover bg-center">
   </div>
 
-  <div class="border-t border-[#1a1a1a] pt-4 pb-3">
+  <div class="border-t border-[#1a1a1a] pt-4">
     <p class="text-center text-[12px] sm:text-[14px] font-normal text-[#1a1a1a]">© 2025 Esimira. All Rights Reserved.</p>
   </div>
 </footer>

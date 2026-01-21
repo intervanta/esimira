@@ -5,7 +5,7 @@
   
   @include('partials._hero')
   
-  @include('partials._search')
+  
   
   <a id="features"></a>
   @include('partials._features')

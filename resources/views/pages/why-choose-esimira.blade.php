@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="flex flex-col justify-start items-center h-[68vh]  w-full bg-[url('../assets/images/terms-bg.png')] bg-cover bg-center relative">
+<div class="flex flex-col justify-start items-center h-[66vh]  w-full bg-[url('../assets/images/terms-bg.png')] bg-cover bg-center relative">
     <section id="hero" class="hero-section max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-[196px] relative z-10">
         <div class="container hero-content">
             <h1>Why Choose Esimira</h1>
@@ -14,8 +14,7 @@
         </div>
     </section>
 </div>
- @include('partials._search')
-<section id="benefits" class="checkout-section py-16">
+<section id="benefits" class="checkout-section py-2">
     <div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 gap-24">
         <h2 class="section-title">Why Travelers <span class="highlight">Choose Esimira</span></h2>
         <div class="text-content">

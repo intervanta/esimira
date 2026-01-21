@@ -12,7 +12,7 @@ class PlanController extends Controller
 {
     public function index(Request $request)
     {
-        $type = $this->validateType($request->get('type', 'local'));
+        $initialType = $this->validateType($request->get('type', 'local'));
         
         // ⚡ 1. FIRST CHECK REDIS (Ultra-fast)
         $allPlans = $this->getAllFromRedis();
@@ -28,18 +28,18 @@ class PlanController extends Controller
         }
         
         // Get bundles for current tab
-        $bundles = collect($allPlans[$type] ?? []);
+        $initialBundles = collect($allPlans[$initialType] ?? []);
         
         // ⚡ 3. FINAL FALLBACK TO DATABASE (Slow - should rarely happen)
-        if ($bundles->isEmpty()) {
-            $bundles = $this->getFromDatabase($type);
-            $allPlans[$type] = $bundles->toArray();
+        if ($initialBundles->isEmpty()) {
+            $initialBundles = $this->getFromDatabase($initialType);
+            $allPlans[$initialType] = $initialBundles->toArray();
             
             // Update Redis with new data
             $this->storeInRedis($allPlans);
         }
 
-        return view('pages.plans', compact('type', 'bundles', 'allPlans'));
+        return view('pages.plans', compact('initialType', 'initialBundles', 'allPlans'));
     }
 
     /**

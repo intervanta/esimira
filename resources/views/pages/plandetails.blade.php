@@ -10,20 +10,15 @@
 @section('meta_keywords', 'esim ' . $bundle->name . ', ' . $bundle->name . ' data plan, travel data, esimira')
 
 @section('content')
-    <div class="flex flex-col justify-start items-center h-[68vh] w-full bg-cover bg-center relative"
-        style="background-image: url('{{ asset('assets/images/sim-bg-banner.png') }}');">
-        <section id="section-hero"
-            class="hero-section hero-section max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-[196px] relative z-10 mt-20">
-            <div class="container">
-                <div class="hero-content">
-                    <h1><span class="font-light">{{ $bundle->name }} Esim</span> <span
+  <div class="flex flex-col justify-start items-center h-[66vh] w-full  bg-[url('../assets/images/about-bg.png')] bg-cover bg-center relative">
+    <section id="hero" class="hero-section max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-[196px] relative z-10">
+        <div class="container hero-content">
+            <h1><span class="font-light">{{ $bundle->name }} Esim</span> <span
                             class="text-primary font-medium">Plan</span></h1>
-                    <p class="breadcrumb">Our Plan → {{ $bundleType }} → {{ $bundle->name }} eSIM plan</p>
-                    @include('partials._search')
-                </div>
-            </div>
-        </section>
-    </div>
+            <p class="breadcrumbs">Our Plan → {{ $bundleType }} → {{ $bundle->name }} eSIM plan</p>
+        </div>
+    </section>
+</div>
 
     <section id="section-plans" class="plans-section">
         <div class="container">
@@ -49,17 +44,24 @@
                             alt="View of {{ $bundle->name }}">
                     </div>
                     <div class="plans-selector">
-                        <h3>Choose your eSIM data plan for {{ $bundle->name }}</h3>
-                        <p>{{ $bundle->description ?: 'Stay connected with a reliable, affordable eSIM for ' . $bundle->name . '—no physical SIM or roaming hassles.' }}
-                        </p>
+                       <div class="flex flex-col gap-1">
+    <h3 class="m-0 leading-tight">
+        Choose your eSIM data plan for {{ $bundle->name }}
+    </h3>
+    <p class="mt-2 text-sm leading-snug">
+        {{ $bundle->description ?: 'Stay connected with a reliable, affordable eSIM for ' . $bundle->name . '—no physical SIM or roaming hassles.' }}
+    </p>
+</div>
+
 
                         <!-- Location & Coverage Info Tips -->
-
-                        <div class="info-tips-grid mb-6">
+<div class="info-div">
+    <h3 class="mb-4">Plan Details</h3>
+                        <div class="info-tips-grid mb-1">
                             <!-- Privacy IP Card -->
                             <div class="info-tip-card clickable" data-modal="privacy-ip-modal">
                                 <div class="tip-icon">
-                                    <i class="fa-solid fa-location-dot"></i>
+                                    <i class="fa-solid fa-location-dot icon-orange"></i>
                                 </div>
                                 <div class="tip-content">
                                     <span class="tip-label">PRIVACY IP</span>
@@ -70,10 +72,10 @@
                             <!-- Countries & Networks Card -->
                             <div class="info-tip-card clickable" data-modal="countries-networks-modal">
                                 <div class="tip-icon">
-                                    <i class="fa-solid fa-globe-americas"></i>
+                                    <i class="fa-solid fa-globe-americas icon-orange"></i>
                                 </div>
                                 <div class="tip-content">
-                                    <span class="tip-label">COUNTRIES & NETWORKS</span>
+                                    <span class="tip-label">Global Networks</span>
                                     <span class="tip-value">{{ count($networks) }} countries</span>
                                 </div>
                             </div>
@@ -81,10 +83,10 @@
                             <!-- Privacy Protected Card -->
                             <div class="info-tip-card clickable" data-modal="privacy-protected-modal">
                                 <div class="tip-icon">
-                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <i class="fa-solid fa-shield-halved icon-orange"></i>
                                 </div>
                                 <div class="tip-content">
-                                    <span class="tip-label">Privacy Protected</span>
+                                    <span class="tip-label">Privacy Secured</span>
                                     <span class="tip-value">Secure Connection</span>
                                 </div>
                             </div>
@@ -92,15 +94,15 @@
                             <!-- Region Card -->
                             <div class="info-tip-card clickable" data-modal="region-modal">
                                 <div class="tip-icon">
-                                    <i class="fa-solid fa-globe"></i>
+                                    <i class="fa-solid fa-map icon-orange"></i>
                                 </div>
                                 <div class="tip-content">
-                                    <span class="tip-label">REGION</span>
+                                    <span class="tip-label">Region</span>
                                     <span class="tip-value">{{ $bundle->region }}</span>
                                 </div>
                             </div>
                         </div>
-
+</div>
                       
                         <div class="plan-options-grid" id="plan-options">
                             @foreach ($bundle->refills as $refill)
@@ -137,10 +139,10 @@
 
                 <div class="features-tabs">
                     <nav class="tabs-nav">
-                        <a href="#" class="tab-link active" data-tab="features">Key features</a>
-                        <a href="#" class="tab-link" data-tab="description">Description</a>
-                        <a href="#" class="tab-link" data-tab="technical">Technical details</a>
-                        <a href="#" class="tab-link" data-tab="coverage">Coverage & Privacy</a>
+                        <a href="javascript:void(0)" class="tab-link active" data-tab="features">Key features</a>
+                        <a href="javascript:void(0)" class="tab-link" data-tab="description">Description</a>
+                        <a href="javascript:void(0)" class="tab-link" data-tab="technical">Technical details</a>
+                        <a href="javascript:void(0)" class="tab-link" data-tab="coverage">Coverage & Privacy</a>
                     </nav>
 
                     <div class="tab-indicator-wrapper">
@@ -289,10 +291,10 @@
     @if (isset($extendedCoverageBundles) && $extendedCoverageBundles->count() > 0)
         <div class="mx-auto" style="background-color: #f6f6f6;">
             <div class="max-w-[1140px] mx-auto py-8 sm:py-12 px-4 sm:px-6">
-                <h2 class="text-[28px] sm:text-[32px] font-bold text-[#101010] text-center mb-3 font-['Satoshi']">
+                <h2 class="text-[20px] sm:text-[20px] font-bold text-[#101010] text-center mb-3 font-['Satoshi']">
                     Need more extensive coverage?
                 </h2>
-                <p class="text-[16px] sm:text-[18px] text-[#828282] text-center mb-8 font-['Satoshi'] max-w-2xl mx-auto">
+                <p class="text-[16px] sm:text-[16px] text-[#000] text-center mb-8 font-['Satoshi'] max-w-2xl mx-auto">
                     Explore our regional and global eSIMs — prices start as shown and include coverage for
                     {{ $bundle->name }}.
                 </p>
@@ -300,55 +302,60 @@
                 <!-- Side Roller Container -->
                 <div class="relative">
                     <!-- Scrollable Container -->
-                    <div class="flex overflow-x-auto pb-6 hide-scrollbar gap-4 px-2" id="extended-coverage-roller">
-                        @foreach ($extendedCoverageBundles as $coverageBundle)
-                            <div class="flex-shrink-0 w-[280px] bg-white rounded-[12px] p-4 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer group"
-                                onclick="window.location.href='{{ url('/plans/' . $coverageBundle['slug']) }}'">
-                                <!-- Header with flag and type -->
-                                    <div class="flex items-center gap-3 mb-3">
-                                        <img src="{{ $coverageBundle['image'] }}"
-                                            alt="{{ $coverageBundle['name'] }}"
-                                            class="w-8 h-8 object-contain rounded-full">
+                   <div class="flex overflow-x-auto pb-6 hide-scrollbar gap-4 px-2" id="extended-coverage-roller">
+    @foreach ($extendedCoverageBundles as $coverageBundle)
+        <div
+            class="relative flex-shrink-0 w-[280px] bg-white rounded-[12px] p-4 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer group"
+            onclick="window.location.href='{{ url('/plans/' . $coverageBundle['slug']) }}'">
 
-                                        <div class="flex-1">
-                                            <h3 class="text-[16px] font-bold text-[#000000] font-['Satoshi'] leading-tight">
-                                                {{ $coverageBundle['name'] }}
-                                            </h3>
+            <!-- Header with flag and type -->
+            <div class="flex items-center gap-3 mb-2">
+                <img src="{{ $coverageBundle['image'] }}"
+                     alt="{{ $coverageBundle['name'] }}"
+                     class="w-8 h-8 object-contain rounded-full">
 
-                                            <div class="flex items-center gap-2">
-                                                <span class="text-[12px] font-medium text-[#666]">
-                                                    {{ $coverageBundle['type'] }} eSIM
-                                                </span>
+                <div class="flex-1">
+                    <h3 class="text-[16px] font-bold text-[#000000] font-['Satoshi'] ms-2 leading-tight">
+                        {{ $coverageBundle['name'] }}
+                    </h3>
 
-                                                @if ($coverageBundle['is_lifetime'])
-                                                    <span
-                                                        class="text-[10px] px-2 py-[2px] rounded-full bg-[#f4633a]/10 text-[#f4633a] font-semibold">
-                                                        Lifetime
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="flex items-center gap-2 mt-5">
+                        <span class="text-[12px] font-medium text-[#666]">
+                            {{ $coverageBundle['type'] }} eSIM
+                        </span>
 
-
-                                <!-- Price Section -->
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <span class="text-[12px] text-[#828282] font-['Satoshi']">
-                                            From
-                                        </span>
-                                        <span class="plan-price text-[18px] font-bold text-[#101010] ml-1"
-                                            data-price="{{ $coverageBundle['min_price'] }}">
-                                            {{ $coverageBundle['currency_sign'] }}{{ number_format($coverageBundle['min_price'], 2) }}
-                                        </span>
-                                    </div>
-                                    <div class="text-[#666] group-hover:text-[#f4633a] transition-colors duration-300">
-                                        <i class="fa-solid fa-chevron-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                        @if ($coverageBundle['is_lifetime'])
+                            <span
+                                class="text-[10px] px-2 py-[2px] rounded-full bg-[#f4633a]/10 text-[#f4633a] font-semibold">
+                                Lifetime
+                            </span>
+                        @endif
                     </div>
+                </div>
+            </div>
+
+            <!-- Price Section -->
+            <div class="flex items-center">
+                <div>
+                    <span class="text-[12px] text-[#828282] font-['Satoshi']">
+                        From
+                    </span>
+                    <span class="plan-price text-[15px] text-[#101010] ml-1"
+                          data-price="{{ $coverageBundle['min_price'] }}">
+                        {{ $coverageBundle['currency_sign'] }}{{ number_format($coverageBundle['min_price'], 2) }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Right Chevron (Perfect vertical center) -->
+            <div class="absolute right-4 top-1/2 -translate-y-1/2 text-[#666] group-hover:text-[#f4633a] transition-colors duration-300">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </div>
+    @endforeach
+</div>
+
 
                     <!-- Scroll Indicators -->
                     <div class="flex justify-center mt-4 space-x-2">
@@ -419,8 +426,46 @@
                 });
             }
 
-            // Tab functionality
-            initTabs();
+   
+//    key features tab
+  const tabsim = document.querySelectorAll('.tab-link');
+  const panesim = document.querySelectorAll('.tab-pane');
+  const indicatorsim = document.querySelector('.tab-indicator');
+
+  function activateTab(tab) {
+    tabsim.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    const target = tab.dataset.tab;
+    panesim.forEach(p => {
+      p.classList.toggle('active', p.dataset.content === target);
+    });
+
+    // Move indicator smoothly
+    const rect = tab.getBoundingClientRect();
+    const parentRect = tab.parentElement.getBoundingClientRect();
+    indicatorsim.style.width = rect.width + 'px';
+    indicatorsim.style.left = (rect.left - parentRect.left) + 'px';
+  }
+
+  tabsim.forEach(tab => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+      activateTab(tab);
+    });
+  });
+
+  // Set correct indicator position on load
+  window.addEventListener('load', () => {
+    const active = document.querySelector('.tab-link.active');
+    if (active) activateTab(active);
+  });
+
+  // Update position on resize
+  window.addEventListener('resize', () => {
+    const active = document.querySelector('.tab-link.active');
+    if (active) activateTab(active);
+  });
 
             // Initialize device compatibility popup if available
             initDeviceCompatibilityPopup();
@@ -503,50 +548,7 @@
                 });
         }
 
-        function initTabs() {
-            const tabLinks = document.querySelectorAll('.tab-link');
-            const tabPanes = document.querySelectorAll('.tab-pane');
-            const tabIndicator = document.querySelector('.tab-indicator');
-
-            tabLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-
-                    const tabName = this.getAttribute('data-tab');
-
-                    // Update active tab link
-                    tabLinks.forEach(tab => tab.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Update active tab pane
-                    tabPanes.forEach(pane => pane.classList.remove('active'));
-                    const activePane = document.querySelector(`.tab-pane[data-content="${tabName}"]`);
-                    if (activePane) {
-                        activePane.classList.add('active');
-                    }
-
-                    // Update tab indicator position
-                    updateTabIndicator(this);
-                });
-            });
-
-            function updateTabIndicator(activeTab) {
-                const tabRect = activeTab.getBoundingClientRect();
-                const containerRect = activeTab.parentElement.getBoundingClientRect();
-                const leftPosition = tabRect.left - containerRect.left;
-
-                if (tabIndicator) {
-                    tabIndicator.style.width = `${tabRect.width}px`;
-                    tabIndicator.style.left = `${leftPosition}px`;
-                }
-            }
-
-            // Initialize tab indicator position
-            const activeTab = document.querySelector('.tab-link.active');
-            if (activeTab && tabIndicator) {
-                updateTabIndicator(activeTab);
-            }
-        }
+       
 
         // Extended Coverage Roller Functionality
         function initExtendedCoverageRoller() {
@@ -927,17 +929,19 @@
         align-items: center;
         gap: 12px;
         padding: 12px;
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
+        background: #fff;
+        border: 1px solid #FFCABB;
         border-radius: 8px;
         transition: all 0.3s ease;
     }
 
-    .info-tip-card:hover {
-        background: #f1f5f9;
-        border-color: #cbd5e1;
-        transform: translateY(-1px);
-    }
+   .info-tip-card:hover {
+    background: #fff;
+    border-color: #FFCABB;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(244, 99, 58, 0.35); /* #F4633A shadow */
+}
+
 
     .tip-icon {
         width: 32px;
@@ -947,7 +951,7 @@
         justify-content: center;
         background: white;
         border-radius: 6px;
-        color: #3b82f6;
+        background-color: #F6F6F6;
         font-size: 14px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
@@ -959,17 +963,17 @@
     }
 
     .tip-label {
-        font-size: 11px;
-        font-weight: 500;
-        color: #64748b;
-        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 400;
+        color: #1A1A1A;
+        /* text-transform: uppercase; */
         letter-spacing: 0.5px;
     }
 
     .tip-value {
-        font-size: 13px;
-        font-weight: 600;
-        color: #1e293b;
+        font-size: 14px;
+        font-weight: 700;
+        color: #1A1A1A;
     }
 
     .tip-note {
@@ -1244,8 +1248,8 @@
 
     /* Ensure radio buttons are visible on mobile */
     .radio-button {
-        min-width: 20px;
-        height: 20px;
+        /* min-width: 20px; */
+        /* height: 20px; */
         border: 2px solid #d1d5db;
         border-radius: 50%;
         margin-right: 0.75rem;
@@ -1282,7 +1286,14 @@
     #extended-coverage-roller {
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
     }
+    .hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
 
     #extended-coverage-roller>div {
         scroll-snap-align: start;

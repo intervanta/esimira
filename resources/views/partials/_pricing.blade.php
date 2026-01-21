@@ -22,7 +22,7 @@
                     <button class="plan-tab {{ $initialType === 'regional' ? 'active-tab font-bold text-[#f4633a]' : 'font-normal text-[#101010]' }} transition-all" data-tab="regional">Regional</button>
                     <button class="plan-tab {{ $initialType === 'global' ? 'active-tab font-bold text-[#f4633a]' : 'font-normal text-[#101010]' }} transition-all" data-tab="global">Global</button>
                     <button class="plan-tab {{ $initialType === 'gcc' ? 'active-tab font-bold text-[#f4633a]' : 'font-normal text-[#101010]' }} transition-all" data-tab="gcc">Middle East</button>
-                    <button class="plan-tab {{ $initialType === 'monthly' ? 'active-tab font-bold text-[#f4633a]' : 'font-normal text-[#101010]' }} transition-all" data-tab="monthly">Lifetime</button>
+                    <button class="plan-tab {{ $initialType === 'monthly' ? 'active-tab font-bold text-[#f4633a]' : 'font-normal text-[#101010]' }} transition-all" data-tab="monthly">Lifetimes</button>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
         </div>
 
         <!-- Tab Intro Text -->
-        <div id="tab-content" class="text-center">
+        <!-- <div id="tab-content" class="text-center">
             <h3 class="text-[20px] font-semibold text-[#101010] mb-2" id="tab-title">
                 {{ $initialType === 'local' ? 'Local' : ($initialType === 'regional' ? 'Regional' : ($initialType === 'global' ? 'Global' : ($initialType === 'gcc' ? 'Middle East' : 'Lifetime'))) }}
             </h3>
@@ -45,36 +45,85 @@
                    ($initialType === 'gcc' ? 'Special plans for Gulf Cooperation Council countries' : 
                    'Long-term connectivity solutions with lifetime subscriptions'))) }}
             </p>
-        </div>
+        </div> -->
 
         <!-- Grid - Initial server-rendered content -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8" id="bundles-grid">
-            @foreach($initialBundles as $bundle)
-                <div class="bg-[#fdfdfd] rounded-[10px] p-3 shadow-[0px_0px_5px_#00000033] pricing-card hover:shadow-[0px_0px_10px_#f4633a33] transition-all duration-300 cursor-pointer"
-                     onclick="window.location.href='/plans/{{ $bundle['slug'] }}'">
-                    <div class="flex items-center gap-3">
-                        <img src="{{ $bundle['image'] }}" alt="{{ $bundle['name'] }}" class="w-[40px] sm:w-[50px] h-[40px] sm:h-[50px] object-contain" loading="lazy" onerror="this.onerror=null; this.src='{{ asset('/assets/images/default-bundle.svg') }}'">
-                        <div class="flex-1">
-                            <div class="flex justify-between items-center mb-1">
-                                <h3 class="text-[18px] sm:text-[20px] font-bold text-[#000000]">{{ $bundle['name'] }}</h3>
-                                <div class="relative w-[6px] h-[12px]">
-                                    <img src="{{ asset('assets/images/img_vector_gray_500_12.svg') }}" class="gray-icon absolute inset-0">
-                                    <img src="{{ asset('assets/images/img_vector_deep_orange_a200.svg') }}" class="orange-icon absolute inset-0 hidden">
-                                </div>
-                            </div>
-                            @if($bundle['min_price'])
-                                <p class="text-[12px] sm:text-[14px] text-[#828282] mt-1">
-                                    From 
-                                    <span data-price-usd="{{ $bundle['price_in_usd'] ?? $bundle['min_price'] }}" class="price-element font-medium text-[#101010]">
-                                        {{ $bundle['currency_sign'] ?? '$' }}{{ number_format($bundle['min_price'], 2) }}
-                                    </span>
-                                </p>
-                            @endif
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8" id="bundles-grid">
+    @foreach($initialBundles as $bundle)
+        <div
+            class="relative bg-[#fdfdfd] rounded-[10px]
+                   p-2
+                   shadow-[0px_0px_5px_#00000033]
+                   pricing-card hover:shadow-[0px_0px_10px_#f4633a33]
+                   transition-all duration-300 cursor-pointer
+                   h-[75px] flex"
+            onclick="window.location.href='/plans/{{ $bundle['slug'] }}'"
+        >
+        @if ($bundle['name'] === 'Australia')
+    <img
+        src="{{ asset('assets/images/offer_2.svg') }}"
+        alt="Offer"
+        class="absolute -top-[0px] right-[10px] h-[15px] w-auto z-10"
+    >
+@endif
+            <div class="flex items-center gap-2 w-full h-full">
+                <img
+                    src="{{ $bundle['image'] }}"
+                    alt="{{ $bundle['name'] }}"
+                    class="w-[33px] sm:w-[44px] h-[36px] sm:h-[44px] ml-[10px] object-contain flex-shrink-0"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='{{ asset('/assets/images/default-bundle.svg') }}'"
+                >
+
+                <div class="flex-1 min-w-0 flex flex-col justify-center">
+                    <div class="flex justify-between items-start gap-2">
+                        <h3
+                            class="text-[16px] sm:text-[18px] font-bold text-[#000000]
+                                   leading-[1.1]
+                                   overflow-hidden text-ellipsis
+                                   [display:-webkit-box]
+                                   [-webkit-line-clamp:2]
+                                   [-webkit-box-orient:vertical]"
+                        >
+                            {{ $bundle['name'] }}
+                        </h3>
+
+                        <div class="relative w-[8px] h-[14px] flex-shrink-0 mt-[12px] me-[4px]">
+                            <img src="{{ asset('assets/images/img_vector_gray_500_12.svg') }}" class="gray-icon absolute inset-0">
+                            <img src="{{ asset('assets/images/img_vector_deep_orange_a200.svg') }}" class="orange-icon absolute inset-0 hidden">
                         </div>
                     </div>
+
+                    @if($bundle['min_price'])
+                        <p
+                            class="text-[11px] sm:text-[12px] text-[#828282]
+                                   leading-none mt-[2px]
+                                   whitespace-nowrap overflow-hidden text-ellipsis"
+                        >
+                            From
+                            
+        <span
+            data-price-usd="{{ $bundle['price_in_usd'] ?? $bundle['min_price'] }}"
+            class="price-element font-medium text-[#101010]"
+        >
+            {{ $bundle['currency_sign'] ?? '$' }}{{ number_format($bundle['min_price'], 2) }}
+        </span>
+    
+
+                            <!-- <span
+                                data-price-usd="{{ $bundle['price_in_usd'] ?? $bundle['min_price'] }}"
+                                class="price-element font-medium text-[#101010]"
+                            >
+                                {{ $bundle['currency_sign'] ?? '$' }}{{ number_format($bundle['min_price'], 2) }}
+                            </span> -->
+                        </p>
+                    @endif
                 </div>
-            @endforeach
+            </div>
         </div>
+    @endforeach
+</div>
+
 
         <div class="text-center">
             <a id="see-all-btn" href="/plans?type={{ $initialType }}" class="inline-block text-[16px] sm:text-[18px] text-white uppercase bg-[#f4633a] rounded-[22px] px-8 py-2 hover:bg-[#e55a33] transition-all">
@@ -96,13 +145,13 @@
         // ⚡ All plans data passed from server for instant switching
         const allPlansData = @json($allPlans ?? []);
 
-        const tabInfo = {
-            local: { title: "Local", desc: "Connect locally with affordable data plans in over 150+ countries" },
-            regional: { title: "Regional", desc: "Stay connected across multiple countries in the same region" },
-            global: { title: "Global", desc: "Worldwide coverage with our comprehensive global plans" },
-            gcc: { title: "Middle East", desc: "Special plans for Gulf Cooperation Council countries" },
-            monthly: { title: "Lifetime", desc: "Long-term connectivity solutions with lifetime subscriptions" },
-        };
+        // const tabInfo = {
+        //     local: { title: "Local", desc: "Connect locally with affordable data plans in over 150+ countries" },
+        //     regional: { title: "Regional", desc: "Stay connected across multiple countries in the same region" },
+        //     global: { title: "Global", desc: "Worldwide coverage with our comprehensive global plans" },
+        //     gcc: { title: "Middle East", desc: "Special plans for Gulf Cooperation Council countries" },
+        //     monthly: { title: "Lifetime", desc: "Long-term connectivity solutions with lifetime subscriptions" },
+        // };
 
         function loadPlans(type) {
             // ⚡ INSTANT SWITCHING: Use preloaded data if available
@@ -133,30 +182,64 @@
                 return;
             }
 
-            bundlesGrid.innerHTML = bundles.map(b => `
-                <div class="bg-[#fdfdfd] rounded-[10px] p-3 shadow-[0px_0px_5px_#00000033] pricing-card hover:shadow-[0px_0px_10px_#f4633a33] transition-all duration-300 cursor-pointer"
-                     onclick="window.location.href='/plans/${b.slug}'">
-                    <div class="flex items-center gap-3">
-                        <img src="${b.image}" alt="${b.name}" class="w-[40px] sm:w-[50px] h-[40px] sm:h-[50px] object-contain" loading="lazy" onerror="this.onerror=null; this.src='{{ asset('/assets/images/default-bundle.svg') }}'">
-                        <div class="flex-1">
-                            <div class="flex justify-between items-center mb-1">
-                                <h3 class="text-[18px] sm:text-[20px] font-bold text-black">${b.name}</h3>
-                                <div class="relative w-[6px] h-[12px]">
-                                    <img src="{{ asset('assets/images/img_vector_gray_500_12.svg') }}" class="gray-icon absolute inset-0">
-                                    <img src="{{ asset('assets/images/img_vector_deep_orange_a200.svg') }}" class="orange-icon absolute inset-0 hidden">
-                                </div>
-                            </div>
-                            ${b.min_price ? `
-                                <p class="text-[12px] sm:text-[14px] text-[#828282] mt-1">
-                                    From 
-                                    <span data-price-usd="${b.price_in_usd || b.min_price}" class="price-element font-medium text-[#101010]">
-                                        ${b.currency_sign || '$'}${parseFloat(b.min_price).toFixed(2)}
-                                    </span>
-                                </p>
-                            ` : ''}
-                        </div>
-                    </div>
-                </div>
+            bundlesGrid.innerHTML = bundles.map(b => `<div
+  class="bg-[#fdfdfd] rounded-[10px] p-3
+         shadow-[0px_0px_5px_#00000033]
+         hover:shadow-[0px_0px_10px_#f4633a33]
+         transition-all duration-300 cursor-pointer
+         w-full h-[75px] flex"
+  onclick="window.location.href='/plans/${b.slug}'"
+>
+  <div class="flex items-center gap-3 w-full h-full">
+    <img
+      src="${b.image}"
+      alt="${b.name}"
+       class="w-[36px] sm:w-[44px] h-[36px] sm:h-[44px] ml-[10px] object-contain flex-shrink-0"
+      loading="lazy"
+      onerror="this.onerror=null; this.src='{{ asset('/assets/images/default-bundle.svg') }}'"
+    />
+
+    <div class="flex flex-col justify-center flex-1 min-w-0">
+      <div class="flex justify-between items-start gap-2">
+        <h3
+          class="text-[18px] sm:text-[20px] font-bold text-black
+                 leading-tight
+                 overflow-hidden text-ellipsis
+                 [display:-webkit-box]
+                 [-webkit-line-clamp:2]
+                 [-webkit-box-orient:vertical]"
+        >
+          ${b.name}
+        </h3>
+
+        <div relative w-[8px] h-[14px] flex-shrink-0 mt-[12px] me-[4px]>
+          <img
+            src="{{ asset('assets/images/img_vector_gray_500_12.svg') }}"
+            class="gray-icon absolute inset-0"
+          />
+          <img
+            src="{{ asset('assets/images/img_vector_deep_orange_a200.svg') }}"
+            class="orange-icon absolute inset-0 hidden"
+          />
+        </div>
+      </div>
+
+      ${b.min_price ? `
+        <p class="text-[12px] sm:text-[14px] text-[#828282]
+                  mt-1 whitespace-nowrap overflow-hidden text-ellipsis">
+          From
+          <span
+            data-price-usd="${b.price_in_usd || b.min_price}"
+            class="price-element font-medium text-[#101010]"
+          >
+            ${b.currency_sign || '$'}${parseFloat(b.min_price).toFixed(2)}
+          </span>
+        </p>
+      ` : ''}
+    </div>
+  </div>
+</div>
+
             `).join("");
 
             initHoverEffect();
@@ -196,8 +279,8 @@
                 tab.classList.add("active-tab", "font-bold", "text-[#f4633a]");
                 tab.classList.remove("font-normal", "text-[#101010]");
 
-                tabTitle.textContent = tabInfo[type].title;
-                tabDesc.textContent = tabInfo[type].desc;
+                // tabTitle.textContent = tabInfo[type].title;
+                // tabDesc.textContent = tabInfo[type].desc;
                 seeAllBtn.href = `/plans?type=${type}`;
 
                 updateIndicator();

@@ -1083,10 +1083,57 @@ video {
     background-color: rgb(253 253 253/var(--tw-bg-opacity, 1))
 }
 /* checkout */
+#feature-center{
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+    margin-top: 16% !important;
+}
+.cards-prop{
+    max-height: 120px !important;
+}
+/* .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+} */
 
+/* Cards */
+.testimonial-card {
+  background: #fff !important;
+  padding: 15px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  transition: all 0.35s ease;
+}
+
+/* Active card */
+.testimonial-card.active-card {
+  transform: scale(1.12);
+  border-color: #f4633a;
+  background: #ffffff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Avatars */
+.avatar-selector {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+   opacity: 0.6;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* .avatar-selector.active {
+  transform: scale(1.3);
+  border: 2px solid #f4633a;
+} */
 
 /* CSS for section section:Hero */
-.hero-section {
+/* .hero-section {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -1094,9 +1141,9 @@ video {
   justify-content: center;
   padding: 60px 20px;
   text-align: center;
-  min-height: 438px; /* 508px total height - 70px header */
+  min-height: 438px; 
   box-sizing: border-box;
-}
+} */
 .hero-bg {
   position: absolute;
   top: -70px; /* Offset by header height */

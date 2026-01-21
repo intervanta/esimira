@@ -337,13 +337,20 @@ img {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-
+.icon-orange {
+    color: #F4633A;
+}
+.info-div{
+  background-color: #F6F6F6;
+  border-radius: 10px;
+  padding: 20px;
+}
 /* === Testimonials === */
-.testimonial-card {
+/* .testimonial-card {
   border: 1px solid transparent;
   transition: all 0.3s ease;
   transform: scale(1);
-}
+} */
 /* === FAQ Section === */
 .faq-item {
   transition: all 0.3s ease;
@@ -431,11 +438,11 @@ img {
   transform: scale(1.2);
   border: 3px solid #f4633a;
 }
-.avatar-selector {
+/* .avatar-selector {
   opacity: 0.6;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.3s ease;
-}
+} */
 
 /* chck */
 
@@ -540,7 +547,7 @@ img {
 }
 .hero-section {
   text-align: center;
-  margin-bottom: 132px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -785,7 +792,7 @@ input {
 }
 .tab-indicator-bg {
   position: absolute;
-  width: 425px;
+  width: 510px;
   height: 1px;
   background-color: #d9d9d9;
 }
@@ -1611,7 +1618,9 @@ input {
 }
 
 #testimonialsContainer {
-  min-height: 200px;
+  min-height: 120px;
+  border-radius: 3px;
+  padding: 30px;
 }
 
 .testimonial-card:hover {
@@ -2532,13 +2541,16 @@ input {
     gap: 40px;
 }
 .cart-title {
-    font-size: 35px;
+    font-size: 33px;
     font-weight: 400;
     margin: 0;
 }
+.cart-amount{
+  font-weight: 600;
+}
 .text-primary-checkout {
     color: var(--primary-color);
-    font-weight: 700;
+    font-weight: 600;
 }
 .text-black-checkout {
     color: #000;
@@ -2585,7 +2597,7 @@ input {
 }
 .card-subtitle {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     margin: 0;
 }
 .plan-details-checkout {
@@ -2606,8 +2618,8 @@ input {
 }
 
 .plan-price {
-    font-weight: 600;
-    font-size: 20px;
+    /* font-weight: 600; */
+    font-size: 18px;
     padding: 10px;
     white-space: nowrap;
 }
@@ -2695,13 +2707,15 @@ input {
     padding: 30px;
     display: flex;
     flex-direction: column;
+    max-width: 50%;
+    width: 50%;
     gap: 30px;
     position: sticky;
     top: 120px; /* header height + some margin */
 }
 .summary-title {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
     margin: 0;
     color: #1a1a1a;
 }
@@ -2741,29 +2755,29 @@ input {
 }
 .mv-container {
   width: 100%;
-  max-width: 888px;
+  max-width: 900px;
   background-color: #f9fafb;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
   padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  /* gap: 30px; */
 }
 
 .mv-title {
   font-family: 'Inter', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   color: #000000;
   margin: 0;
-  padding-left: 15px; /* Align with visual hierarchy */
+  /* padding-left: 15px; Align with visual hierarchy */
 }
 
 .mv-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 10px; */
 }
 
 .mv-card {
@@ -2810,7 +2824,7 @@ input {
 }
 
 .mv-card-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: #000000;
   line-height: 1.2;
@@ -2829,11 +2843,11 @@ input {
   border-radius: 50px;
   color: #f4633a;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 500;
   padding: 7px 10px;
-  height: 45px;
-  min-width: 100px;
+  height: 35px;
+  min-width: 50px;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -4150,7 +4164,9 @@ input {
   .mv-card-left {
     width: 100%;
   }
-  
+    .hero-section {
+    margin-top: 50px !important;
+  }
   .mv-btn {
     width: 100%;
   }
@@ -4198,6 +4214,19 @@ input {
   }
   .sidebar {
     width: 100%;
+  }
+   .hero-content h1{
+    font-size: 38px;
+    margin-top: 150px;
+  }
+  .section-sub-title{
+    text-align: center !important;
+  }
+  .section-title{
+    text-align: center !important;
+  }
+  .text-block{
+    text-align: center !important;
   }
   .sidebar ul {
     flex-direction: row;
@@ -4334,7 +4363,8 @@ input {
     padding: 15px;
   }
     .hero-section {
-    margin-bottom: 60px;
+      font-size: small;
+    margin-top: 50px;
   }
   .hero-title {
     font-size: 48px;

@@ -130,7 +130,9 @@
             align-items: center;
             justify-content: center;
         }
-        
+        .text-decoration{
+            text-decoration: none;
+        }
         .feature-item:nth-child(3) .feature-icon-wrapper {
             padding: 16px 19px;
         }
@@ -257,7 +259,7 @@
             margin-bottom: 30px;
             font-family: var(--font-primary);
             font-weight: 400;
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1;
             color: var(--color-link);
             text-decoration: none;
@@ -319,33 +321,35 @@
             margin-bottom: 30px;
         }
         
-        .btn-social {
-            height: 52px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 16px;
-            border: 1px solid var(--color-border-dark);
-            border-radius: 50px;
-            background-color: transparent;
-            cursor: pointer;
-            font-family: var(--font-primary);
-            font-size: 16px;
-            font-weight: 400;
-            color: var(--color-text-black);
-            letter-spacing: 0.16px;
-            transition: all 0.3s ease;
-        }
+.btn-social {
+    display: grid;
+    grid-template-columns: 30px 175px 0px;
+    align-items: center;
+     justify-content: center !important;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border-dark);
+    border-radius: 50px;
+    background-color: transparent;
+    font-family: var(--font-primary);
+    font-size: 16px;
+    color: var(--color-text-black);
+    text-decoration: none;
+}
+
         
         .btn-social:hover {
             background-color: #f5f5f5;
         }
         
-        .btn-social img {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-        }
+     .btn-social img {
+    width: 26px;
+    height: 26px;
+    justify-self: center; /* icon fixed position */
+}
+.btn-social span {
+    justify-content: center;   /* text perfectly centered */
+    margin-left: 12px;
+}
 
         .signup-link {
             text-align: center;
@@ -596,18 +600,22 @@
                         <hr>
                     </div>
                     <div class="social-login">
-                        <a href="{{ route('social.redirect', 'google') }}" class="btn btn-social">
-                            <img src="{{ asset('assets/images/75_12487.svg') }}" alt="Google icon">
-                            <span>Sign In with Google</span>
-                        </a>
-                        <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-social">
-                            <img src="{{ asset('assets/images/75_12502.svg') }}" alt="Facebook icon">
-                            <span>Sign In with Facebook</span>
-                        </a>
-                        <a href="{{ route('social.redirect', 'apple') }}" class="btn btn-social">
-                            <img src="{{ asset('assets/images/a2be846863522e8be393a7ed3a097e051ec9bbfb.png') }}" alt="Apple icon">
-                            <span>Sign In with Apple</span>
-                        </a>
+                     <a href="{{ route('social.redirect', 'google') }}" class="btn btn-social">
+    <img src="{{ asset('assets/images/75_12487.svg') }}">
+    <span>Sign In with Google</span>
+</a>
+
+<a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-social">
+    <img src="{{ asset('assets/images/75_12502.svg') }}">
+    <span>Sign In with Facebook</span>
+</a>
+
+<a href="{{ route('social.redirect', 'apple') }}" class="btn btn-social">
+    <img src="{{ asset('assets/images/a2be846863522e8be393a7ed3a097e051ec9bbfb.png') }}">
+    <span>Sign In with Apple</span>
+</a>
+
+
                     </div>
                     <p class="signup-link">
                         Don't you have an account? <a href="{{ route('register') }}">Sign up</a>

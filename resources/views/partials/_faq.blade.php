@@ -1,4 +1,4 @@
-<section class="w-full py-16 sm:py-20 lg:py-24 w-full bg-[url('../assets/images/seventh_banner.png')] bg-cover bg-center" id="1_38_0_4377_1440_748">
+<section class="w-full py-16 sm:py-20 lg:py-24 w-full bg-[url('../assets/images/seventh_banner.png')] bg-cover bg-center bg-fixed" id="1_38_0_4377_1440_748">
   <div class="w-full max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <div class="flex items-center justify-center gap-2 mb-4" id="1:4892"><img src="{{ asset('assets/images/img_group_5911.svg') }}" alt="FAQ icon" class="w-[14px] h-[16px]" id="1:4893"><span class="text-[12px] font-medium text-[#000000] font-['Satoshi'] leading-[17px] uppercase" id="1:4896">FAQ</span></div>

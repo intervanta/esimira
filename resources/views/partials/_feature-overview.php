@@ -3,20 +3,17 @@
     <div class="flex flex-col lg:flex-row items-center lg:items-start text-center lg:text-left gap-12 lg:gap-16">
       
       <!-- Left Section -->
-      <div class="lg:w-2/5 lg:sticky lg:top-20">
-        <div class="flex items-center justify-center lg:justify-start gap-2 mb-5" id="1:4837">
-          <img src="assets/images/img_group_5911.svg" alt="feature icon" class="w-[14px] h-[16px]" id="1:4838">
-          <span class="text-[12px] font-medium text-[#000000] font-['Satoshi'] leading-[17px] uppercase" id="1:4841">
-            Feature Overview
-          </span>
-        </div>
-
-        <h2 class="text-[28px] sm:text-[32px] lg:text-[35px] font-normal text-[#101010] font-['Satoshi'] leading-[36px] sm:leading-[40px] lg:leading-[45px] capitalize">
-          <span>Travel </span>
-          <span class="font-bold text-[#f4633a]">Free,</span>
-          <span><br>Let Go of Every Worry</span>
-        </h2>
-      </div>
+     <div class="lg:w-2/5 lg:sticky lg:top-20" id="feature-center">
+            <div class="flex items-center gap-2 mb-5" id="1:4837">
+              <img src="../assets/images/img_group_5911.svg" alt="feature icon" class="w-[14px] h-[16px]" id="1:4838">
+              <span class="text-[12px] font-medium text-[#000000] font-['Satoshi'] leading-[17px] uppercase" id="1:4841">Feature Overview</span>
+            </div>
+            <h2 class="text-[28px] sm:text-[32px] lg:text-[35px] font-normal text-[#101010] font-['Satoshi'] leading-[36px] sm:leading-[40px] lg:leading-[45px] capitalize">
+              <span>Travel </span>
+              <span class="font-bold text-[#f4633a]">Free,</span>
+              <span><br>Let Go of Every Worry</span>
+            </h2>
+          </div>
 
       <!-- Right Section -->
       <div class="lg:w-3/5 scrollable-content" id="1:4843">

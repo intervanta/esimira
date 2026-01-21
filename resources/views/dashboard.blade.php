@@ -41,7 +41,6 @@
     </div>
 </section>
 
-@include('partials._search')
 @include('partials._faq')
 @include('partials._footer')
 

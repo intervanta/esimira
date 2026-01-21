@@ -44,7 +44,7 @@
 
 @section('content')
     <div
-        class="flex flex-col justify-start items-center h-[68vh] w-full  bg-[url('../assets/images/terms-bg.png')] bg-cover bg-center relative">
+        class="flex flex-col justify-start items-center h-[66vh] w-full  bg-[url('../assets/images/terms-bg.png')] bg-cover bg-center relative">
 
         <section id="hero"
             class="hero-section max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-[196px] relative z-10">

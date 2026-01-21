@@ -9,15 +9,16 @@
         </div>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center gap-6" id="1_38_481_44_286_24">
+        <nav class="hidden lg:flex items-center gap-6 flex-1 mx-6" id="1_38_481_44_286_24">
+             <!-- Header Search -->
             @php
                 $nav = [
                     ['route' => 'home', 'label' => 'Home'],
-                    ['route' => 'why-choose-esimira', 'label' => 'Why Choose Esimira'],
-                    ['route' => 'plans', 'label' => 'Our eSIM Plans'],
-                    ['route' => 'about', 'label' => 'About Esimira'],
-                    ['route' => 'help', 'label' => 'Help'],
-                    ['route' => 'reseller-business', 'label' => 'Reseller & Business'],
+                     ['route' => 'about', 'label' => 'About'],
+                  
+                    ['route' => 'plans', 'label' => 'Our Plans'],                   
+                   
+                    ['route' => 'reseller-business', 'label' => 'Business Partners'],
                     ['route' => 'my-esims', 'label' => 'My Esims'],
                 ];
             @endphp
@@ -35,16 +36,88 @@
                     {{ $item['label'] }}
                 </a>
             @endforeach
-        </nav>
-
+       
+  </nav>
         <!-- Right Section -->
-        <div class="flex items-center gap-4">
-            <!-- Mobile Menu Button -->
-            <button id="mobileMenuButton" class="lg:hidden p-2 rounded-md text-[#101010] hover:bg-gray-100" aria-label="Toggle menu">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
+        <div class="hidden lg:flex items-center gap-4">
+            <!-- search -->
+           <div class="relative w-full">
+  <input
+    type="search"
+    id="searchInput"
+    name="q"
+    placeholder="Search country, region..."
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    data-lpignore="true"
+    data-form-type="other"
+    readonly
+    onfocus="this.removeAttribute('readonly')"
+    class="w-full rounded-[26px] px-6 py-3 pr-16
+           text-[14px] sm:text-[14px] font-normal text-[#101010]
+           font-['Satoshi'] leading-[20px] sm:leading-[22px]
+           border border-[#e5e7eb]
+           focus:outline-none focus:ring-2 focus:ring-[#f4633a]"
+  />
+
+  <!-- Search Icon -->
+  <button
+    type="button"
+    class="absolute right-4 top-1/2 -translate-y-1/2"
+  >
+    <img
+      src="/assets/images/img_frame_black_900_01.svg"
+      alt="search"
+      class="w-[15px] sm:w-[16px] h-auto"
+    />
+  </button>
+
+  <!-- Search List (DROPDOWN BELOW) -->
+  <!-- Country List -->
+    <div id="searchList" class="absolute left-0 right-0 mt-2 bg-white rounded-xl shadow-lg min-w-[500px] max-h-[300px] overflow-y-auto hidden border border-gray-100">
+      <h3 class="px-4 pt-3 pb-1 text-gray-700 font-semibold text-sm">Popular Locations</h3>
+      <hr class="border-gray-200 mb-2">
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 px-4 pb-4">
+        <a href="#" class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
+          <img src="../assets/images/257_42442.svg" alt="France" class="w-6 h-6">
+          <span>France</span>
+        </a>
+        <a href="#" class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
+          <img src="../assets/images/257_42454.svg" alt="UAE" class="w-6 h-6">
+          <span>UAE</span>
+        </a>
+        <a href="#" class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
+          <img src="../assets/images/257_42469.svg" alt="Italy" class="w-6 h-6">
+          <span>Italy</span>
+        </a>
+        <a href="#" class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
+          <img src="../assets/images/257_42478.svg" alt="USA" class="w-6 h-6">
+          <span>USA</span>
+        </a>
+        <a href="#" class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
+          <img src="../assets/images/257_42753.svg" alt="India" class="w-6 h-6">
+          <span>India</span>
+        </a>
+        <a href="#" class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
+          <img src="../assets/images/257_42507.svg" alt="Australia" class="w-6 h-6">
+          <span>Australia</span>
+        </a>
+        <a href="#" class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
+          <img src="../assets/images/257_42541.svg" alt="New Zealand" class="w-6 h-6">
+          <span>New Zealand</span>
+        </a>
+        <a href="#" class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
+          <img src="../assets/images/257_42731.svg" alt="Malaysia" class="w-6 h-6">
+          <span>Malaysia</span>
+        </a>
+      </div>
+    </div>
+</div>
+
+
 
             @auth
            <!-- MiraVault Balance -->
@@ -57,7 +130,7 @@
             @endauth
 
             <!-- Currency Selector - Hidden on mobile -->
-            <div class="hidden lg:block relative" id="currencySelector">
+            <div class="hidden lg:block relative w-40" id="currencySelector">
                 @php
                     $currencyData = getCurrencyData();
                     $currentCurrency = getCurrentCurrency();
@@ -66,13 +139,11 @@
                 @endphp
 
                 <!-- Visible custom dropdown -->
-                <div class="flex items-center gap-2 cursor-pointer group px-3 py-2 rounded-lg border border-gray-200 hover:border-[#f4633a] transition-colors" id="currencyDropdownButton">
-                    <span class="text-sm font-medium text-gray-900 font-['Satoshi']">
+                <div class="flex items-center gap-1 cursor-pointer rounded-[26px] bg-[#EAEAEA] group px-2 py-2 border border-gray-200 hover:border-[#f4633a] transition-colors" id="currencyDropdownButton">
+                   <img src="../assets/images/inr-flag.png" alt="dropdown" class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"/>
+                 <span class="text-sm font-medium text-gray-900 font-['Satoshi']">
                         {{ $currentCurrency }}
                     </span>
-                    <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
                 </div>
 
                 <!-- Dropdown menu -->
@@ -106,19 +177,19 @@
             </div>
 
             <!-- Language Selector - Hidden on mobile -->
-            <div class="hidden lg:block relative" id="languageSelector">
+            <!-- <div class="hidden lg:block relative" id="languageSelector"> -->
                 <!-- Visible custom dropdown -->
-                <div class="flex items-center gap-2 cursor-pointer group px-3 py-2 rounded-lg border border-gray-200 hover:border-[#f4633a] transition-colors" id="languageDropdownButton">
+                <!-- <div class="flex items-center gap-2 cursor-pointer group px-3 py-2 rounded-lg border border-gray-200 hover:border-[#f4633a] transition-colors" id="languageDropdownButton">
                     <span class="text-sm font-medium text-gray-900 font-['Satoshi'] uppercase">
                         {{ strtoupper(app()->getLocale()) }}
                     </span>
                     <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
-                </div>
+                </div> -->
 
                 <!-- Dropdown menu -->
-                <div id="languageDropdownMenu" class="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg hidden z-20">
+                <!-- <div id="languageDropdownMenu" class="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg hidden z-20">
                     <ul class="py-1 text-sm text-gray-900 font-['Satoshi']">
                         @foreach (['en' => 'English', 'ar' => 'العربية'] as $code => $name)
                             <li>
@@ -129,7 +200,7 @@
                         @endforeach
                     </ul>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Auth Section -->
             @auth
@@ -186,16 +257,20 @@
                 </div>
             @else
                 <!-- Auth Buttons (visible when not logged in) -->
-                <div class="auth-buttons hidden md:flex items-center gap-3 sm:gap-5" id="authButtons">
-                    <a href="{{ route('register') }}" class="text-[14px] sm:text-[16px] font-normal text-[#f4633a] font-['Satoshi'] leading-[22px] uppercase border border-[#f4633a] rounded-[18px] px-4 sm:px-6 py-2 bg-[#ffffff] hover:bg-[#f4633a] hover:text-white transition-all">Sign Up</a>
-                    <a href="{{ route('login') }}" class="text-[14px] sm:text-[16px] font-normal text-[#ffffff] font-['Satoshi'] leading-[22px] uppercase rounded-[18px] px-4 sm:px-6 py-2 bg-[#f4633a] hover:bg-[#e55a33] transition-all">Sign In</a>
+                <div class="auth-buttons hidden md:flex items-center gap-3 sm:gap-5 w-full" id="authButtons">
+                    <a href="{{ route('register') }}" class="w-[118px] text-center text-[14px] sm:text-[16px] font-normal text-[#f4633a] font-['Satoshi'] leading-[22px] uppercase border border-[#f4633a] rounded-[18px] px-4 sm:px-6 py-2 bg-[#ffffff] hover:bg-[#f4633a] hover:text-white transition-all">Sign Up</a>
+                    <a href="{{ route('login') }}" class="w-[118px] text-center text-[14px] sm:text-[16px] font-normal text-[#ffffff] font-['Satoshi'] leading-[22px] uppercase rounded-[18px] px-4 sm:px-6 py-2 bg-[#f4633a] hover:bg-[#e55a33] transition-all">Sign In</a>
                 </div>
             @endauth
         </div>
+       
     </div>
 
     <!-- Mobile Navigation -->
 <div class="lg:hidden">
+    <div class="mb-6">
+   
+</div>
     <!-- Mobile Menu Overlay -->
     <div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-30 z-40 hidden transition-opacity duration-300"></div>
 
@@ -1014,17 +1089,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Close dropdowns when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('#languageSelector')) {
-            closeLanguageDropdown();
-        }
-        if (!event.target.closest('#currencySelector')) {
-            closeCurrencyDropdown();
-        }
-        if (!event.target.closest('#profileNav')) {
-            closeProfileDropdown();
-        }
-    });
+function closeLanguageDropdown() {
+    const dropdown = document.querySelector('#languageSelector .dropdown-menu');
+    if (!dropdown) return;   // ✅ prevent error
+    dropdown.classList.remove('open');
+}
+
+function closeCurrencyDropdown() {
+    const dropdown = document.querySelector('#currencySelector .dropdown-menu');
+    if (!dropdown) return;
+    dropdown.classList.remove('open');
+}
+
+function closeProfileDropdown() {
+    const dropdown = document.querySelector('#profileNav .dropdown-menu');
+    if (!dropdown) return;
+    dropdown.classList.remove('open');
+}
+
 
     // Close on escape key
     document.addEventListener('keydown', function(event) {

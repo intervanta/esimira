@@ -293,27 +293,35 @@
       gap: 15px;
     }
 
-    .social-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      padding: 12px;
-      border: 1px solid var(--border-dark);
-      border-radius: 50px;
-      font-size: 16px;
-      font-weight: 400;
-      color: #111111;
-      background: white;
-      cursor: pointer;
-    }
+   .social-btn {
+    display: grid;
+    grid-template-columns: 40px 180px 0px; /* icon | text | spacer */
+    align-items: center;
+    justify-content: center !important;
+    padding: 12px 16px;
+    border: 1px solid var(--border-dark);
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #111111;
+    background: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+ .social-btn:hover {
+            background-color: #f5f5f5;
+        }
 
     .social-btn img {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
+      width: 26px;
+      height: 26px;
+      justify-self: center;
     }
 
+.social-btn span {
+   justify-content: center;   /* text perfectly centered */
+    margin-left: 12px;
+}
     .signin-link {
       text-align: center;
       font-size: 18px;
@@ -327,23 +335,24 @@
       text-decoration: none;
     }
 
-    .checkbox-group {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-top: 10px;
-    }
+   .checkbox-group {
+    display: flex;
+    align-items: center; /* CENTER checkbox + text */
+    gap: 10px;
+    margin-top: 10px;
+}
 
-    .checkbox-group input[type="checkbox"] {
-      margin-top: 3px;
-      width: 18px;
-      height: 18px;
-    }
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0; /* REMOVE top margin */
+}
 
-    .checkbox-group label {
-      font-size: 14px;
-      line-height: 1.4;
-    }
+.checkbox-group label {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
 
     .checkbox-group a {
       color: var(--primary-color);
@@ -639,7 +648,7 @@
                   <img src="../assets/images/75_13514.svg" alt="Show password">
                 </button>
               </div>
-              <p class="text-secondary" style="font-size: 12px; color: #6b7280; margin-top: 4px;">Password must be at least 8 characters with uppercase, lowercase, number, and special character</p>
+              <p class="text-secondary" style="font-size: 12px; color: #6b7280; margin-top: 4px;">Minimum 8 characters with upper, lower, number & symbol</p>
               <p x-show="errors.password" x-text="errors.password?.[0]" class="error-message"></p>
             </div>
             <div class="form-group">

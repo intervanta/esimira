@@ -345,64 +345,40 @@ faqItems.forEach(item => {
 
 
   // Testimonials logic 
+
   const avatars = document.querySelectorAll('.avatar-selector');
-const testimonialsContainer = document.getElementById('testimonialsContainer');
- const testimonialSets = [
-    [
-      { name: "Robert", role: "HR Manager", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_670e85fe14e5634.png" },
-      { name: "Alice", role: "CEO, etc.venues", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_670e85fe14e5634_48x48.png" },
-      { name: "Alan", role: "Team Lead",text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Helena Turpin.png" }
-    ],
-    [
-      { name: "John", role: "Marketing Head", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" },
-      { name: "Priya", role: "Project Manager",text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" },
-      { name: "Lee", role: "Tech Lead", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Anurag Singh.png" }
-    ],
-    [
-      { name: "David", role: "Traveler", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" },
-      { name: "Nina", role: "Photographer", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Helena Turpin.png" },
-      { name: "Ravi", role: "Freelancer",text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" }
-    ],
-    [
-      { name: "Mia", role: "HR Specialist", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.",img: "../assets/images/img_kain_kyel_seo.png" },
-      { name: "Tom", role: "Consultant", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Helena Turpin.png" },
-      { name: "Sophia", role: "Manager", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" }
-    ],
-    [
-      { name: "Arun", role: "Engineer",text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_tab_raghav_pavaman.png" },
-      { name: "Emma", role: "Designer", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/Helena Turpin.png" },
-      { name: "Leo", role: "Product Lead", text: "Bloomr always asked good questions for our projects and helped us execute them at  a high level, top work!.", img: "../assets/images/img_kain_kyel_seo.png" }
-    ]
-  ];
+  const cards = document.querySelectorAll('.testimonial-card');
 
-   function renderTestimonials(index) {
-  if (!testimonialsContainer) return;
-  testimonialsContainer.innerHTML = '';
-  const currentSet = testimonialSets[index] || testimonialSets[0];
-  currentSet.forEach(t => {
-    testimonialsContainer.innerHTML += `
-      <div class="snap-center shrink-0 w-[80%] sm:w-auto mx-2 bg-[#f4f4f6] rounded-[12px] p-6 flex flex-col justify-between text-left">
-        <p class="text-[14px] sm:text-[16px] font-normal text-[#020203] leading-[24px] mb-4">"${t.text}"</p>
-        <div class="flex items-center gap-3">
-          <img src="${t.img}" alt="${t.name}" class="w-[36px] h-[36px] rounded-full">
-          <div>
-            <h4 class="text-[12px] font-bold text-[#020203] leading-[17px]">${t.name}</h4>
-            <p class="text-[12px] text-[#020203] leading-[17px]">${t.role}</p>
-          </div>
-        </div>
-      </div>`;
-  });
-}
+  function activateCard(index) {
+    cards.forEach((card, i) => {
+      card.classList.remove('active-card');
 
-    renderTestimonials(0);
-
-    avatars.forEach((avatar, index) => {
-      avatar.addEventListener('click', () => {
-        avatars.forEach(a => a.classList.remove('active'));
-        avatar.classList.add('active');
-        renderTestimonials(index);
-      });
+      if (i === index) {
+        card.classList.add('active-card');
+        card.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        });
+      }
     });
+  }
+
+  avatars.forEach((avatar) => {
+    avatar.addEventListener('click', () => {
+      const index = Number(avatar.dataset.card);
+
+      avatars.forEach(a => a.classList.remove('active'));
+      avatar.classList.add('active');
+
+      activateCard(index);
+    });
+  });
+
+  // Initial state
+  activateCard(0);
+  avatars[0].classList.add('active');
+
 
 // =============================
 // SMOOTH SCROLL
@@ -536,45 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-//    key features tab
-  const tabsim = document.querySelectorAll('.tab-link');
-  const panesim = document.querySelectorAll('.tab-pane');
-  const indicatorsim = document.querySelector('.tab-indicator');
 
-  function activateTab(tab) {
-    tabsim.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-
-    const target = tab.dataset.tab;
-    panesim.forEach(p => {
-      p.classList.toggle('active', p.dataset.content === target);
-    });
-
-    // Move indicator smoothly
-    const rect = tab.getBoundingClientRect();
-    const parentRect = tab.parentElement.getBoundingClientRect();
-    indicatorsim.style.width = rect.width + 'px';
-    indicatorsim.style.left = (rect.left - parentRect.left) + 'px';
-  }
-
-  tabsim.forEach(tab => {
-    tab.addEventListener('click', e => {
-      e.preventDefault();
-      activateTab(tab);
-    });
-  });
-
-  // Set correct indicator position on load
-  window.addEventListener('load', () => {
-    const active = document.querySelector('.tab-link.active');
-    if (active) activateTab(active);
-  });
-
-  // Update position on resize
-  window.addEventListener('resize', () => {
-    const active = document.querySelector('.tab-link.active');
-    if (active) activateTab(active);
-  });
 function popupOpen() {
   document.getElementById('compatibility-modal').style.display = 'flex';
 }
